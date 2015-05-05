@@ -2,19 +2,21 @@ module Refinery
   module Authentication
     module Devise
       class Engine < ::Rails::Engine
-        extend Refinery::Engine
+        include Refinery::Engine
 
-        isolate_namespace Refinery
+        isolate_namespace Refinery::Authentication::Devise
         engine_name :refinery_authentication
 
         config.autoload_paths += %W( #{config.root}/lib )
 
-        initializer "register refinery_authentication_devise plugin" do
+        before_inclusion do
           Refinery::Plugin.register do |plugin|
             plugin.pathname = root
             plugin.name = 'refinery_authentication_devise'
             plugin.menu_match = %r{refinery/users$}
-            plugin.url = proc { Refinery::Core::Engine.routes.url_helpers.admin_users_path }
+            plugin.url = proc {
+              Refinery::Core::Engine.routes.url_helpers.authentication_devise_admin_users_path
+            }
           end
         end
 

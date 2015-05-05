@@ -22,7 +22,7 @@ module Refinery
 
         # This defines the devise method for refinery routes
         def signed_in_root_path(resource_or_scope)
-          scope = Devise::Mapping.find_scope!(resource_or_scope)
+          scope = ::Devise::Mapping.find_scope!(resource_or_scope)
           home_path = "#{scope}_root_path"
           if respond_to?(home_path, true)
             refinery.send(home_path)
@@ -47,27 +47,16 @@ module Refinery
         # extension namespace isolation...
         def after_sign_in_path_for(resource_or_scope)
           pop_stored_location ||
-          sanitized_stored_location_for(resource_or_scope) ||
-          signed_in_root_path(resource_or_scope)
+            sanitized_stored_location_for(resource_or_scope) ||
+            signed_in_root_path(resource_or_scope)
         end
 
         def after_sign_out_path_for(resource_or_scope)
           refinery.root_path
         end
 
-        def refinery_user?
-          refinery_user_signed_in? && current_refinery_user.has_role?(:refinery)
-        end
-
         protected :store_location, :pop_stored_location, :redirect_back_or_default,
-                  :sanitized_stored_location_for, :refinery_user?
-
-        def self.included(base)
-          if base.respond_to? :helper_method
-            base.send :helper_method, :current_refinery_user, :current_user_session,
-                                      :refinery_user_signed_in?, :refinery_user?
-          end
-        end
+                  :sanitized_stored_location_for
       end
     end
   end

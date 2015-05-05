@@ -2,7 +2,7 @@ require 'devise'
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
-Devise.setup do |config|
+::Devise.setup do |config|
   config.secret_key = ENV['DEVISE_SECRET_KEY'] || SecureRandom.hex
 
   # ==> Mailer Configuration
@@ -18,7 +18,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   ActiveSupport.on_load(:active_record) do
-    Devise.setup do
+    ::Devise.setup do
       require 'devise/orm/active_record'
     end
   end
