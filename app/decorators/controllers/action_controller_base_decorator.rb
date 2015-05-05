@@ -22,4 +22,4 @@ module RefineryAuthenticationDeviseActionControllerBaseDecoration
   end
 end
 
-ActionController::Base.prepend RefineryAuthenticationDeviseActionControllerBaseDecoration
+ActionController::Base.send :prepend, RefineryAuthenticationDeviseActionControllerBaseDecoration

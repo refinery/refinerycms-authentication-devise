@@ -17,4 +17,4 @@ module RefineryAuthenticationDeviseAdminControllerDecorator
   end
 end
 
-Refinery::AdminController.prepend RefineryAuthenticationDeviseAdminControllerDecorator
+Refinery::AdminController.send :prepend, RefineryAuthenticationDeviseAdminControllerDecorator
