@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "User admin page", :type => :feature do
-  refinery_login_with :refinery_superuser
+  refinery_login_with_devise :authentication_devise_refinery_superuser
 
   describe "new/create" do
     def visit_and_fill_form
@@ -55,7 +55,7 @@ describe "User admin page", :type => :feature do
       expect(page).to have_content("cmsrefinery (cms@example.com)")
     end
 
-    let(:dotty_user) { FactoryGirl.create(:refinery_user, :username => 'user.name.with.lots.of.dots') }
+    let(:dotty_user) { FactoryGirl.create(:authentication_devise_refinery_user, :username => 'user.name.with.lots.of.dots') }
     it "accepts a username with a '.' in it" do
       dotty_user # create the user
       visit refinery.authentication_devise_admin_users_path
@@ -71,7 +71,9 @@ describe "User admin page", :type => :feature do
   end
 
   describe "destroy" do
-    let!(:user) { FactoryGirl.create(:user, :username => "ugisozols") }
+    let!(:user) {
+      FactoryGirl.create(:authentication_devise_refinery_user, username: "ugisozols")
+    }
 
     it "can only destroy regular users" do
       visit refinery.authentication_devise_admin_users_path

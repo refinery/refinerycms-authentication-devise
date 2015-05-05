@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Refinery::Authentication::Devise::Admin::UsersController, :type => :controller do
-  refinery_login_with [:refinery, :superuser]
+  refinery_login_with_devise [:refinery, :superuser]
 
   shared_examples_for "new, create, update, edit and update actions" do
     it "loads roles" do
@@ -51,7 +51,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
   end
 
   describe "#edit" do
-    refinery_login_with :refinery_superuser
+    refinery_login_with_devise [:refinery, :superuser]
 
     it "renders the edit template" do
       get :edit, :id => logged_in_user.id
@@ -63,9 +63,9 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
   end
 
   describe "#update" do
-    refinery_login_with :refinery_superuser
+    refinery_login_with_devise [:refinery, :superuser]
 
-    let(:additional_user) { FactoryGirl.create :refinery_user }
+    let(:additional_user) { FactoryGirl.create :authentication_devise_refinery_user }
     it "updates a user" do
       allow(Refinery::Authentication::Devise::User).to receive_message_chain(:includes, :find) { additional_user }
       patch "update", :id => additional_user.id.to_s, :user => {:username => 'bobby'}

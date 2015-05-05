@@ -1,12 +1,12 @@
 FactoryGirl.define do
-  factory :user, :class => Refinery::Authentication::Devise::User do
+  factory :authentication_devise_user, :class => Refinery::Authentication::Devise::User do
     sequence(:username) { |n| "refinery#{n}" }
     sequence(:email) { |n| "refinery#{n}@example.com" }
     password  "refinerycms"
     password_confirmation "refinerycms"
   end
 
-  factory :refinery_user, :parent => :user do
+  factory :authentication_devise_refinery_user, :parent => :authentication_devise_user do
     roles { [ ::Refinery::Authentication::Devise::Role[:refinery] ] }
 
     after(:create) do |user|
@@ -16,7 +16,12 @@ FactoryGirl.define do
     end
   end
 
-  factory :refinery_superuser, :parent => :refinery_user do
-    roles { [ ::Refinery::Authentication::Devise::Role[:refinery], ::Refinery::Authentication::Devise::Role[:superuser] ]}
+  factory :authentication_devise_refinery_superuser, :parent => :authentication_devise_refinery_user do
+    roles {
+      [
+        ::Refinery::Authentication::Devise::Role[:refinery],
+        ::Refinery::Authentication::Devise::Role[:superuser]
+      ]
+    }
   end
 end

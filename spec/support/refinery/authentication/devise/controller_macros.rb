@@ -6,10 +6,10 @@ module Refinery
           base.send :include, ::Devise::TestHelpers
         end
 
-        def refinery_login_with(*roles)
+        def refinery_login_with_devise(*roles)
           roles = handle_deprecated_roles!(roles).flatten
           let(:logged_in_user) do
-            FactoryGirl.create(:user).tap do |user|
+            FactoryGirl.create(:authentication_devise_user).tap do |user|
               roles.each do |role|
                 user.add_role(role)
               end
@@ -19,10 +19,6 @@ module Refinery
             @request.env["devise.mapping"] = ::Devise.mappings[:authentication_devise_user]
             sign_in logged_in_user
           end
-        end
-
-        def refinery_login_with_factory(factory)
-          factory_user factory
         end
 
         def factory_user(factory)

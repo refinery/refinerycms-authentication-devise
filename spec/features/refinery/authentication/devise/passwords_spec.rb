@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "password recovery", :type => :feature do
-  let!(:user) { FactoryGirl.create(:refinery_user, :email => "refinery@example.com") }
+  let!(:user) { FactoryGirl.create(:authentication_devise_refinery_user, :email => "refinery@example.com") }
 
   it "asks user to specify email address" do
     visit refinery.login_path

@@ -5,8 +5,10 @@ module Refinery
     module Devise
       describe User, :type => :model do
 
-        let(:user) { FactoryGirl.create(:user) }
-        let(:refinery_user) { FactoryGirl.create(:refinery_user) }
+        let(:user) { FactoryGirl.create(:authentication_devise_user) }
+        let(:refinery_user) {
+          FactoryGirl.create(:authentication_devise_refinery_user)
+        }
 
         context "Roles" do
           context "add_role" do
@@ -96,11 +98,11 @@ module Refinery
         end
 
         describe "#can_delete?" do
-          let(:user_not_persisted) { FactoryGirl.build(:refinery_user) }
+          let(:user_not_persisted) { FactoryGirl.build(:authentication_devise_refinery_user) }
           let(:super_user) do
-            super_user = FactoryGirl.create(:refinery_user)
-            super_user.add_role(:superuser)
-            super_user
+            FactoryGirl.create(:authentication_devise_refinery_user).tap do |user|
+              user.add_role(:superuser)
+            end
           end
 
           context "won't allow to delete" do
@@ -135,13 +137,13 @@ module Refinery
         end
 
         describe "#can_edit?" do
-          let(:user_not_persisted) { FactoryGirl.build(:refinery_user) }
+          let(:user_not_persisted) { FactoryGirl.build(:authentication_devise_refinery_user) }
           let(:super_user) do
-            super_user = FactoryGirl.create(:refinery_user)
-            super_user.add_role(:superuser)
-            super_user
+            FactoryGirl.create(:authentication_devise_refinery_user).tap do |user|
+              user.add_role(:superuser)
+            end
           end
-          let(:user_persisted) { FactoryGirl.create(:refinery_user)}
+          let(:user_persisted) { FactoryGirl.create(:authentication_devise_refinery_user)}
 
           context "won't allow to edit" do
             it "non-persisted user record" do
@@ -167,7 +169,7 @@ module Refinery
         describe "#plugins=" do
           context "when user is not persisted" do
             it "does not add plugins for this user" do
-              new_user = FactoryGirl.build(:user)
+              new_user = FactoryGirl.build(:authentication_devise_user)
               new_user.plugins = ["test"]
               expect(new_user.plugins).to be_empty
             end
@@ -239,9 +241,9 @@ module Refinery
 
         describe "#create_first" do
           let(:first_user) do
-            first = FactoryGirl.build(:user)
-            first.create_first
-            first
+            FactoryGirl.build(:authentication_devise_user).tap do |user|
+              user.create_first
+            end
           end
 
           it "adds refinery role" do

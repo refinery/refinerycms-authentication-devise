@@ -5,7 +5,7 @@ describe "sign in", :type => :feature do
   let(:login_retry_path) { refinery.authentication_devise_user_session_path }
   let(:admin_path) { "/#{Refinery::Core.backend_route}" }
   let!(:user) {
-    FactoryGirl.create(:refinery_user, :username => "ugisozols",
+    FactoryGirl.create(:authentication_devise_refinery_user, :username => "ugisozols",
                                        :password => "123456",
                                        :password_confirmation => "123456")
   }
@@ -72,7 +72,7 @@ describe 'redirects', :type => :feature do
   let(:login_path) { refinery.login_path }
 
   before do
-    FactoryGirl.create(:refinery_user,
+    FactoryGirl.create(:authentication_devise_refinery_user,
       :username => "ugisozols",
       :password => "123456",
       :password_confirmation => "123456"

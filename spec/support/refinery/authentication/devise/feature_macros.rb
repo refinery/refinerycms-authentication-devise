@@ -3,7 +3,9 @@ module Refinery
     module Devise
       module FeatureMacros
 
-        def refinery_login
+        def refinery_login_with_devise(factory)
+          let!(:logged_in_user) { FactoryGirl.create(factory) }
+
           before do
             visit refinery.login_path
 
@@ -12,12 +14,6 @@ module Refinery
 
             click_button "Sign in"
           end
-        end
-
-        def refinery_login_with(factory)
-          let!(:logged_in_user) { FactoryGirl.create(factory) }
-
-          refinery_login
         end
 
       end
