@@ -5,6 +5,10 @@ module RefineryAuthenticationDeviseActionControllerBaseDecoration
     base.prepend_before_action :detect_authentication_devise_user!
   end
 
+  def refinery_user?
+    current_refinery_user && current_refinery_user.has_role?(:refinery)
+  end
+
   protected
   def refinery_users_exist?
     Refinery::Authentication::Devise::Role[:refinery].users.any?
