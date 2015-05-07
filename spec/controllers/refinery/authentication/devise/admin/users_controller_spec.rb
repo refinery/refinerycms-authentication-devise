@@ -67,14 +67,12 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
 
     let(:additional_user) { FactoryGirl.create :authentication_devise_refinery_user }
     it "updates a user" do
-      allow(Refinery::Authentication::Devise::User).to receive_message_chain(:includes, :find) { additional_user }
       patch "update", :id => additional_user.id.to_s, :user => {:username => 'bobby'}
       expect(response).to be_redirect
     end
 
     context "when specifying plugins" do
       it "won't allow to remove 'Users' plugin from self" do
-        allow(Refinery::Authentication::Devise::User).to receive_message_chain(:includes, :find) { logged_in_user }
         patch "update", :id => logged_in_user.id.to_s, :user => {:plugins => ["some plugin"]}
 
         expect(flash[:error]).to eq("You cannot remove the 'Users' plugin from the currently logged in account.")

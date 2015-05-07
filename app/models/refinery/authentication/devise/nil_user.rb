@@ -17,6 +17,10 @@ module Refinery
           false
         end
 
+        def can_edit?(user)
+          false
+        end
+
         def landing_url
           Refinery::Core.backend_path
         end

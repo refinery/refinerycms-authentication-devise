@@ -72,7 +72,7 @@ module Refinery
         def active_plugins
           @active_plugins ||= Refinery::Plugins.new(
             Refinery::Plugins.registered.select do |plugin|
-              authorised_plugins.include?(plugin.name)
+              has_role?(:superuser) || authorised_plugins.include?(plugin.name)
             end
           )
         end
