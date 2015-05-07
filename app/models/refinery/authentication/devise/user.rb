@@ -57,16 +57,9 @@ module Refinery
 
         def plugins=(plugin_names)
           return :can_not_set_plugins_when_not_persisted unless persisted?
-          plugin_names = string_plugin_names(plugin_names)
 
-          if plugins.empty?
-            plugin_names.each_with_index do |plugin_name, index|
-              plugins.create(:name => plugin_name, :position => index)
-            end
-          else
-            filtered_names = filter_existing_plugins_for(plugin_names)
-            create_plugins_for(filtered_names)
-          end
+          filtered_names = filter_existing_plugins_for(string_plugin_names(plugin_names))
+          create_plugins_for(filtered_names)
         end
 
         def active_plugins
@@ -153,7 +146,7 @@ module Refinery
         end
 
         def plugin_position
-          plugins.select(:position).map{ |p| p.position.to_i}.max + 1
+          plugins.select(:position).map{ |p| p.position.to_i}.max.to_i + 1
         end
 
         def filter_existing_plugins_for(plugin_names)
