@@ -37,7 +37,7 @@ module Refinery
              (user = User.where(:email => email).first).present?
 
             token = user.generate_reset_password_token!
-            UserMailer.reset_notification(user, request, token).deliver
+            UserMailer.reset_notification(user, request, token).deliver_now
             redirect_to refinery.login_path,
                         :notice => t('email_reset_sent', :scope => 'refinery.authentication.devise.users.forgot')
           else
