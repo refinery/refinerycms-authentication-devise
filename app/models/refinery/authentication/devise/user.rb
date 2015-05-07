@@ -69,15 +69,24 @@ module Refinery
           end
         end
 
-        def authorized_plugins
+        def active_plugins
+          @active_plugins ||= Refinery::Plugins.new(
+            Refinery::Plugins.registered.select do |plugin|
+              authorised_plugins.include?(plugin.name)
+            end
+          )
+        end
+
+        def authorised_plugins
           plugins.collect(&:name) | ::Refinery::Plugins.always_allowed.names
         end
+        alias_method :authorized_plugins, :authorised_plugins
 
         # Returns a URL to the first plugin with a URL in the menu. Used for
         # admin user's root admin url.
         # See Refinery::Core::NilUser#landing_url.
         def landing_url
-          plugins.in_menu.first_url_in_menu
+          active_plugins.in_menu.first_url_in_menu
         end
 
         def can_delete?(user_to_delete = self)

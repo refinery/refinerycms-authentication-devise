@@ -13,7 +13,7 @@ module Refinery
           Refinery::Plugin.register do |plugin|
             plugin.pathname = root
             plugin.name = 'refinery_authentication_devise'
-            plugin.menu_match = %r{refinery/users$}
+            plugin.menu_match = %r{refinery/(authentication/devise/)?users$}
             plugin.url = proc {
               Refinery::Core::Engine.routes.url_helpers.authentication_devise_admin_users_path
             }
@@ -32,6 +32,10 @@ module Refinery
 
         config.after_initialize do
           Refinery.register_extension(Refinery::Authentication::Devise)
+
+          Rails.application.reload_routes!
+          Refinery::Core.refinery_logout_path =
+            Refinery::Core::Engine.routes.url_helpers.logout_path
         end
       end
     end

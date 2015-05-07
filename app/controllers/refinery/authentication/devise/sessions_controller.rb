@@ -7,6 +7,7 @@ module Refinery
 
         before_action :clear_unauthenticated_flash, :only => [:new]
         before_action :force_signup_when_no_users!
+        after_action :detect_authentication_devise_user!, only: [:create]
 
         def create
           super

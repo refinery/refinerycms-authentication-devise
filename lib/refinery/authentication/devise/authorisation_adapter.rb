@@ -15,6 +15,21 @@ module Refinery
           @current_user = set_to_this_user
         end
 
+        def allow?(operation, resource)
+          case
+          when resource == :site_bar
+            current_user.has_role?(:refinery)
+          when operation == :plugin
+            current_user.active_plugins.names.include?(resource)
+          when operation == :controller
+            current_user.active_plugins.any? do |plugin|
+              Regexp.new(plugin.menu_match) === resource
+            end
+          else
+            false
+          end
+        end
+
       end
     end
   end

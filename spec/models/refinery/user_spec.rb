@@ -210,12 +210,12 @@ module Refinery
           end
         end
 
-        describe "#authorized_plugins" do
-          it "returns array of user and always allowd plugins" do
+        describe "#authorised_plugins" do
+          it "returns array of user and always allowed plugins" do
             ["refinery_one", "refinery_two", "refinery_three"].each_with_index do |name, index|
               user.plugins.create!(:name => name, :position => index)
             end
-            expect(user.authorized_plugins).to eq(user.plugins.collect { |p| p.name } | ::Refinery::Plugins.always_allowed.names)
+            expect(user.authorised_plugins).to eq(user.plugins.collect(&:name) | ::Refinery::Plugins.always_allowed.names)
           end
         end
 
