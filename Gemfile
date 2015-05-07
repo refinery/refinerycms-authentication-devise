@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-gem 'zilch-authorisation', git: 'https://github.com/parndt/zilch-authorisation', branch: "master"
 git "https://github.com/refinery/refinerycms", branch: "auth-for-real-yo-tmp" do
   gem "refinerycms"
 
