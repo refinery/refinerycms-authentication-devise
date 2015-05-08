@@ -27,6 +27,12 @@ it:
             forgot_password: Password dimenticata?
             sign_in: Entra
             hello_please_sign_in: Ciao! Accedi per favore.
+        user_mailer:
+          reset_notification:
+            subject: Link per reimpostare la password
+            reset_request_received_for: "È stata richiesta la reimpostazione della password per %{username}"
+            visit_this_url: Visita questo URL per scegliere una nuova password
+            remain_same_if_no_action: "La password rimarrà la stessa se non si effettua una scelta"
         users:
           new:
             fill_form: Compila il form sottostante con i tuoi dati
@@ -45,22 +51,27 @@ it:
             successful: "Il ripristino della password è avvenuto con successo per %{email}"
             pick_new_password_for: "Scegli una nuova password per %{email}"
             reset_password: Reimposta la password
-        user_mailer:
-          reset_notification:
-            subject: Link per reimpostare la password
-            reset_request_received_for: "È stata richiesta la reimpostazione della password per %{username}"
-            visit_this_url: Visita questo URL per scegliere una nuova password
-            remain_same_if_no_action: "La password rimarrà la stessa se non si effettua una scelta"
+        roles:
+          superuser: Superuser
+          refinery: Refinery
   activerecord:
+    models:
+      refinery/authentication/devise/user: utente
     attributes:
       refinery/authentication/devise/user:
         login: accesso
-        email: email
+        username: username
         password: password
+        password_confirmation:
+        email: Email
         remember_me: Ricordati di me
+        full_name: Nome completo
   devise:
     failure:
       unauthenticated: "Devi accedere o registrarti per continuare."
       invalid: "Indirizzo email o password non validi."
+      not_found_in_database: "Spiacenti, la tua username e/o password sono incorretti."
     sessions:
       signed_in: "Accesso effettuato con successo."
+      refinery_user:
+        signed_out: Uscito con successo.
