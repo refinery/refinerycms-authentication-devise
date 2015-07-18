@@ -13,7 +13,7 @@ module Refinery
         context "Roles" do
           context "add_role" do
             it "raises Exception when Role object is passed" do
-              expect {user.add_role(Refinery::Authentication::Devise::Role.new)}.to raise_exception
+              expect {user.add_role(Refinery::Authentication::Devise::Role.new)}.to raise_exception(::ArgumentError)
             end
 
             it "adds a Role to the User when role not yet assigned to User" do
@@ -33,7 +33,7 @@ module Refinery
 
           context "has_role" do
             it "raises Exception when Role object is passed" do
-              expect{ user.has_role?(Refinery::Authentication::Devise::Role.new)}.to raise_exception
+              expect{ user.has_role?(Refinery::Authentication::Devise::Role.new)}.to raise_exception(::ArgumentError)
             end
 
             it "returns the true if user has Role" do

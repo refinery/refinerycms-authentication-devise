@@ -94,12 +94,12 @@ module Refinery
         end
 
         def add_role(title)
-          raise ArgumentException, "Role should be the title of the role not a role object." if title.is_a?(::Refinery::Authentication::Devise::Role)
+          raise ::ArgumentError, "Role should be the title of the role not a role object." if title.is_a?(::Refinery::Authentication::Devise::Role)
           roles << ::Refinery::Authentication::Devise::Role[title] unless has_role?(title)
         end
 
         def has_role?(title)
-          raise ArgumentException, "Role should be the title of the role not a role object." if title.is_a?(::Refinery::Authentication::Devise::Role)
+          raise ::ArgumentError, "Role should be the title of the role not a role object." if title.is_a?(::Refinery::Authentication::Devise::Role)
           roles.any?{ |r| r.title == title.to_s.camelize}
         end
 
