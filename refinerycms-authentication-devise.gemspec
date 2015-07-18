@@ -5,7 +5,6 @@ Gem::Specification.new do |s|
   s.version           = %q{1.0.0}
   s.summary           = %q{Devise based authentication extension for Refinery CMS}
   s.description       = %q{A Devise authentication extension for Refinery CMS}
-  s.email             = %q{info@refinerycms.com}
   s.homepage          = %q{http://refinerycms.com}
   s.authors           = ['Philip Arndt', 'Rob Yurkowski']
   s.license           = %q{MIT}
