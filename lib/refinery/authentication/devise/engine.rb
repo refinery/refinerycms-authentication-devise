@@ -5,7 +5,7 @@ module Refinery
         include Refinery::Engine
 
         isolate_namespace Refinery::Authentication::Devise
-        engine_name :refinery_authentication
+        engine_name :refinery_authentication_devise
 
         config.autoload_paths += %W( #{config.root}/lib )
 

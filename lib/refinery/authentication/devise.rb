@@ -4,11 +4,12 @@ require 'devise'
 require 'friendly_id'
 
 module Refinery
-  autoload :AuthenticationDeviseGenerator, 'generators/refinery/authentication/devise/authentication_generator'
   autoload :AuthenticationSystem, 'refinery/authenticated_system'
 
   module Authentication
     module Devise
+      autoload :Generator, 'generators/refinery/authentication/devise_generator'
+
       require 'refinery/authentication/devise/engine'
       require 'refinery/authentication/devise/configuration'
 
@@ -24,3 +25,5 @@ module Refinery
     end
   end
 end
+
+# require 'generators/refinery/authentication/devise_generator'
