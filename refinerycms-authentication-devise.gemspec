@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = %q{refinerycms-authentication-devise}
-  s.version           = %q{1.0.2}
+  s.version           = %q{1.0.3}
   s.summary           = %q{Devise based authentication extension for Refinery CMS}
   s.description       = %q{A Devise authentication extension for Refinery CMS}
   s.homepage          = %q{http://refinerycms.com}
