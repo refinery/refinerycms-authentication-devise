@@ -52,7 +52,7 @@ module Refinery
         end
 
         def after_sign_out_path_for(resource_or_scope)
-          refinery.root_path
+          refinery.login_path
         end
 
         protected :store_location, :pop_stored_location, :redirect_back_or_default,

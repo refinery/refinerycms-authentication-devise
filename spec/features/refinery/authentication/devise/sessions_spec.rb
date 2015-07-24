@@ -101,3 +101,26 @@ describe 'redirects', :type => :feature do
   end
 
 end
+
+describe "sign out", :type => :feature do
+  before do
+    FactoryGirl.create(:authentication_devise_refinery_user,
+      :username => "ugisozols",
+      :password => "123456",
+      :password_confirmation => "123456"
+    )
+    visit refinery.login_path
+    fill_in "Username or email", :with => "ugisozols"
+    fill_in "Password", :with => "123456"
+    click_button "Sign in"
+  end
+
+  context "when I sign out" do
+    before { click_on "Log out" }
+
+    it "redirects me back to the sign in page" do
+      expect(current_path).to eq(refinery.login_path)
+      expect(page).to have_content("Signed out successfully")
+    end
+  end
+end
