@@ -70,6 +70,10 @@ module Refinery
           )
         end
 
+        def has_plugin?(name)
+          active_plugins.names.include?(name)
+        end
+
         def authorised_plugins
           plugins.collect(&:name) | ::Refinery::Plugins.always_allowed.names
         end

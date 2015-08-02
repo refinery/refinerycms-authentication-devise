@@ -218,6 +218,22 @@ module Refinery
           end
         end
 
+        describe "#has_plugin?" do
+          before do
+            allow(user).to receive(:active_plugins).and_return(
+              OpenStruct.new(names: %w[koru haka])
+            )
+          end
+
+          it "is true when the user has an active plugin of the same name" do
+            expect(user.has_plugin?("koru")).to be_truthy
+          end
+
+          it "is false when the user doesn't have an active plugin of the same name" do
+            expect(user.has_plugin?("waiata")).to be_falsey
+          end
+        end
+
         describe "#authorised_plugins" do
           it "returns array of user and always allowed plugins" do
             ["refinery_one", "refinery_two", "refinery_three"].each_with_index do |name, index|
