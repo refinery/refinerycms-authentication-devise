@@ -38,18 +38,58 @@ module Refinery
         when: '1.1 of refinerycms-authentication-devise',
         replacement: 'Refinery::Authentication::Devise#email_from_name'
       )
-
+      
       Refinery::Authentication::Devise.email_from_name
     end
-
+    
     def email_from_name=(value)
       Refinery.deprecate(
         'Refinery::Authentication#email_from_name=',
         when: '1.1 of refinerycms-authentication-devise',
         replacement: 'Refinery::Authentication::Devise#email_from_name='
       )
-
+      
       Refinery::Authentication::Devise.email_from_name = value
+    end
+    
+    def refinery_roles_users_tablename
+      Refinery.deprecate(
+        'Refinery::Authentication#refinery_roles_users_tablename',
+        when: '1.1 of refinerycms-authentication-devise',
+        replacement: 'Refinery::Authentication::Devise#refinery_roles_users_tablename'
+      )
+
+      Refinery::Authentication::Devise.refinery_roles_users_tablename
+    end
+
+    def refinery_roles_users_tablename=(value)
+      Refinery.deprecate(
+        'Refinery::Authentication#refinery_roles_users_tablename=',
+        when: '1.1 of refinerycms-authentication-devise',
+        replacement: 'Refinery::Authentication::Devise#refinery_roles_users_tablename='
+      )
+
+      Refinery::Authentication::Devise.refinery_roles_users_tablename = value
+    end
+
+    def refinery_roles_tablename
+      Refinery.deprecate(
+        'Refinery::Authentication#refinery_roles_tablename',
+        when: '1.1 of refinerycms-authentication-devise',
+        replacement: 'Refinery::Authentication::Devise#refinery_roles_tablename'
+      )
+
+      Refinery::Authentication::Devise.refinery_roles_tablename
+    end
+
+    def refinery_roles_tablename=(value)
+      Refinery.deprecate(
+        'Refinery::Authentication#refinery_roles_tablename=',
+        when: '1.1 of refinerycms-authentication-devise',
+        replacement: 'Refinery::Authentication::Devise#refinery_roles_tablename='
+      )
+
+      Refinery::Authentication::Devise.refinery_roles_tablename = value
     end
   end
 end
