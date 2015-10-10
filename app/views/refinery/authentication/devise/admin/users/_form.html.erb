@@ -13,6 +13,8 @@
              :object => @user,
              :include_object_name => true %>
 
+  <%= render 'customize_form', :f => f %>
+
   <div class='form-group'>
     <%= f.label :username, "Username for login" %>
     <div class="validation">
@@ -20,6 +22,8 @@
     </div>
     <%= f.text_field :username, :placeholder => 'Username', :class => 'form-control form-control-lg','data-validate'=>'required_w_name', 'data-val-field' => 'username'  %>
   </div>
+
+  <%= yield :after_username %>
 
   <div class='form-group'>
     <div class="validation">
@@ -43,6 +47,8 @@
       <%= f.password_field :password_confirmation, :autocomplete => 'off', :class => 'form-control form-control-lg' %>
     </div>
   <% end %>
+
+  <%= yield :before_plugin_access %>
 
   <div class="card collapse in" id="admin-advanced">
     <%= yield :advanced_settings %>
