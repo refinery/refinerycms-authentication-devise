@@ -25,6 +25,9 @@ module Refinery
           Refinery::Core.backend_path
         end
 
+        def present?
+          false
+        end
       end
     end
   end

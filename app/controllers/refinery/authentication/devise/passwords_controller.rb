@@ -31,13 +31,36 @@ module Refinery
                       :flash => ({ :error => t('code_invalid', :scope => 'refinery.authentication.devise.users.reset') })
         end
 
+        def edit
+          if params[:reset_password_token].blank?
+            set_flash_message(:alert, :no_token)
+            redirect_to new_session_path(resource_name)
+            return
+          end
+
+          token = ::Devise.token_generator.digest(self.resource, :reset_password_token, params[:reset_password_token])
+          @resource = resource_class.where(reset_password_token: token).first
+
+          if @resource.blank? || !@resource.reset_password_period_valid?
+            set_flash_message(:alert, @resource.blank? ? :no_token : :expired_token)
+            redirect_to new_session_path(resource_name)
+            return
+          end
+
+          if current_refinery_user.present?
+            sign_out(current_refinery_user)
+          end
+
+          self.resource = resource_class.new
+          resource.reset_password_token = params[:reset_password_token]
+        end
+
         # POST /registrations/password
         def create
           if params[:authentication_devise_user].present? && (email = params[:authentication_devise_user][:email]).present? &&
              (user = User.where(:email => email).first).present?
 
-            token = user.generate_reset_password_token!
-            UserMailer.reset_notification(user, request, token).deliver_now
+            user.send_reset_password_instructions
             redirect_to refinery.login_path,
                         :notice => t('email_reset_sent', :scope => 'refinery.authentication.devise.users.forgot')
           else
@@ -50,6 +73,30 @@ module Refinery
             self.new
 
             render :new
+          end
+        end
+
+        # PUT /resource/password
+        def update
+          self.resource = resource_class.reset_password_by_token(resource_params)
+          yield resource if block_given?
+          @resource = self.resource
+
+          if resource.errors.empty?
+            resource.unlock_access! if unlockable?(resource)
+
+            # Added in to set an unconfirmed resource to confirmed.
+            unless resource.confirmed?
+              self.resource.confirmed_on = Time.new.strftime('%Y-%m-%d %H:%M:%S')
+              self.resource.save
+            end
+
+            flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
+            set_flash_message(:notice, flash_message) if is_flashing_format?
+            sign_in(resource_name, resource)
+            respond_with resource, location: after_resetting_password_path_for(resource)
+          else
+            respond_with resource
           end
         end
       end

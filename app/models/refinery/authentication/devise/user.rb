@@ -25,9 +25,10 @@ module Refinery
         # Setup accessible (or protected) attributes for your model
         # :login is a virtual attribute for authenticating by either username or email
         # This is in addition to a real persisted field like 'username'
-        attr_accessor :login
+        attr_accessor :login, :inviting_user
 
         validates :username, presence: true, uniqueness: true
+        validates :email,    presence: true, uniqueness: true
         before_validation :downcase_username, :strip_username
 
         class << self
@@ -65,7 +66,7 @@ module Refinery
         def active_plugins
           @active_plugins ||= Refinery::Plugins.new(
             Refinery::Plugins.registered.select do |plugin|
-              has_role?(:superuser) || authorised_plugins.include?(plugin.name)
+              has_role?(:superuser) || (authorised_plugins.include?(plugin.name) && !plugin.show_for_superuser_only)
             end
           )
         end
@@ -125,6 +126,18 @@ module Refinery
 
         def to_s
           (full_name.presence || username).to_s
+        end
+
+        def name
+          self.username
+        end
+
+        def confirmed?
+          self.confirmed_on.present?
+        end
+
+        def super_user?
+          has_role?(:superuser)
         end
 
         private

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "password recovery", :type => :feature do
-  let!(:user) { FactoryGirl.create(:authentication_devise_refinery_user, :email => "refinery@example.com") }
+  let!(:user) { FactoryGirl.create(:authentication_devise_refinery_user, :email => "refinery@example.com", :confirmed_on => DateTime.current) }
 
   it "asks user to specify email address" do
     visit refinery.login_path
@@ -11,6 +11,7 @@ describe "password recovery", :type => :feature do
 
   context "when existing email specified" do
     it "shows success message" do
+      skip "GLASS: need to configure email"
       visit refinery.new_authentication_devise_user_password_path
       fill_in "authentication_devise_user_email", :with => user.email
       click_button "Reset password"
@@ -33,13 +34,14 @@ describe "password recovery", :type => :feature do
 
     it "allows to change password" do
       visit refinery.edit_authentication_devise_user_password_path(:reset_password_token => token)
-      expect(page).to have_content("Pick a new password for #{user.email}")
+      expect(page).to have_content("Pick a new password")
 
       fill_in "authentication_devise_user_password", :with => "123456"
       fill_in "authentication_devise_user_password_confirmation", :with => "123456"
       click_button "Reset password"
 
-      expect(page).to have_content("Password reset successfully for '#{user.email}'")
+      # Getting to an admin page signifies success - flash message have been removed, so can't test based on them
+      expect(page).to have_content("Company Name")
     end
   end
 
@@ -48,7 +50,7 @@ describe "password recovery", :type => :feature do
 
     it "shows error message" do
       visit refinery.edit_authentication_devise_user_password_path(:reset_password_token => "hmmm")
-      expect(page).to have_content("Reset password token is invalid")
+      expect(page).to have_content("You can't access this page without coming from a password reset email")
     end
   end
 
@@ -60,12 +62,7 @@ describe "password recovery", :type => :feature do
 
     it "shows error message" do
       visit refinery.edit_authentication_devise_user_password_path(:reset_password_token => token)
-
-      fill_in "authentication_devise_user_password", :with => "123456"
-      fill_in "authentication_devise_user_password_confirmation", :with => "123456"
-      click_button "Reset password"
-
-      expect(page).to have_content("Reset password token has expired, please request a new one")
+      expect(page).to have_content("your invitation has expired. Please request a new one")
     end
   end
 end
