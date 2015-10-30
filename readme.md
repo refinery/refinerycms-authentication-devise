@@ -14,7 +14,7 @@ Then run `bundle install` to install it.
 
 ## Installation
 
-If you're moving from a pre-3.0 release of Refinery, you lost authentication when it moved out of RefineryCMS core. After installing this gem, follow these steps to migrate old user data and re-enable authentication
+If you're moving from a pre-3.0 release of Refinery, you lost authentication when it moved out of RefineryCMS core. After installing this gem, follow these steps to migrate old user data and re-enable authentication.
 
 ### Generate and run migrations
 
