@@ -6,6 +6,7 @@ module Refinery
 
           crudify :'refinery/authentication/devise/user',
                   :order => 'username ASC',
+                  :searchable => false,
                   :title_attribute => 'username'
 
           before_action :find_available_plugins, :find_available_roles,
