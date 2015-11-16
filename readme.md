@@ -7,7 +7,7 @@ This extension allows you to use Devise with Refinery CMS 3.0 and later.
 Simply put this in the Gemfile of your Refinery application:
 
 ```ruby
-gem 'refinerycms-authentication-devise', '~> 1.0.2'
+gem 'refinerycms-authentication-devise', '~> 1.0.4'
 ```
 
 ## Contributing
