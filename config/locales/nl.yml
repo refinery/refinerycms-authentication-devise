@@ -54,6 +54,8 @@ nl:
         roles:
           superuser: Beheerder
           refinery: Refinery-gebruiker
+        delete:
+          message: "Weet je zeker dat je %{title} definitief wil verwijderen ?"
   devise:
     failure:
       unauthenticated: U moet inloggen om verder te kunnen

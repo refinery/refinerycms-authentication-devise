@@ -54,6 +54,8 @@ en:
         roles:
           superuser: Superuser
           refinery: Refinery
+        delete:
+          message: "Are you sure you want to permanently remove %{title} ?"
   devise:
     failure:
       unauthenticated: You need to sign in before continuing.
