@@ -54,12 +54,17 @@ fr:
         roles:
           superuser: Superuser
           refinery: Refinery
+        delete:
+          message: "Êtes vous sûr de vouloir supprimer définitivement %{title} ?"
   devise:
     failure:
       unauthenticated: Vous devez vous connecter ou vous inscrire pour continuer.
       invalid: Courriel ou mot de passe incorrect.
+      not_found_in_database: "Désolé, identifiant ou mot de passe incorrect."
     sessions:
       signed_in: Réussite de la connexion.
+      refinery_user:
+        signed_out: "Réussite de la déconnexion."
   activerecord:
     models:
       refinery/authentication/devise/user: utilisateur
