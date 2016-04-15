@@ -55,7 +55,7 @@ fr:
           superuser: Superuser
           refinery: Refinery
         delete:
-          message: "Êtes vous sûr de vouloir supprimer définitivement %{title} ?"
+          message: "Êtes vous sûr(e) de vouloir supprimer définitivement %{title} ?"
   devise:
     failure:
       unauthenticated: Vous devez vous connecter ou vous inscrire pour continuer.
