@@ -17,6 +17,7 @@ module Refinery
             plugin.url = proc {
               Refinery::Core::Engine.routes.url_helpers.authentication_devise_admin_users_path
             }
+            plugin.icon = "icon icon-user"
           end
         end
 

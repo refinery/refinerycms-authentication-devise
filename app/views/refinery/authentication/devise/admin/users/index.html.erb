@@ -1,6 +1,13 @@
-<section id='records'>
-  <%= render 'records' %>
-</section>
-<aside id='actions'>
-  <%= render 'actions' %>
-</aside>
+<% content_for :admin_content do %>
+  <section id='admin-page-content' class='admin-index container-fluid'>
+    <div class="row">
+      <div class="col-xs-12">
+        <h2 class="admin-title">Users</h2>
+        <%= render 'actions' %>
+      </div>
+      <div class="col-xs-12 index-listing">
+        <%= render 'records' %>
+      </div>
+    </div>
+  </section>
+<% end %>
