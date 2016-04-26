@@ -15,6 +15,8 @@ module Refinery
 
         friendly_id :username, use: [:slugged]
 
+        acts_as_indexed :fields => [:username, :email]
+
         # Include default devise modules. Others available are:
         # :token_authenticatable, :confirmable, :lockable and :timeoutable
         if self.respond_to?(:devise)
