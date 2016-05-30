@@ -3,7 +3,7 @@ ru:
     plugins:
       refinery_authentication_devise:
         title: Пользователи
-        article: masculine
+        description: Управляйте пользователями
     authentication:
       devise:
         admin:
@@ -27,6 +27,12 @@ ru:
             hello_please_sign_in: 'Пожалуйста, войдите.'
             sign_in: Войти
             forgot_password: Я забыл свой пароль
+        user_mailer:
+          reset_notification:
+            subject: Ссылка для сброса пароля
+            reset_request_received_for: "Получен запрос на сброс пароля для %{username}"
+            visit_this_url: Для ввода нового пароля пройдите по этой ссылке
+            remain_same_if_no_action: Вы также можете проигнорировать это письмо. В этом случае пароль не будет изменён.
         users:
           new:
             fill_form: Заполните данные ниже.
@@ -45,18 +51,20 @@ ru:
             successful: "Пароль успешно изменен для %{email}"
             pick_new_password_for: "Введите новый пароль для %{email}"
             reset_password: Изменить пароль
-        user_mailer:
-          reset_notification:
-            subject: Ссылка для сброса пароля
-            reset_request_received_for: "Получен запрос на сброс пароля для %{username}"
-            visit_this_url: Для ввода нового пароля пройдите по этой ссылке
-            remain_same_if_no_action: Вы также можете проигнорировать это письмо. В этом случае пароль не будет изменён.
+        roles:
+          superuser: Суперпользователь
+          refinery: Refinery
+        delete:
+          message: "Вы на самом деле хотите навсегда удалить %{title}?"
   devise:
     failure:
       unauthenticated: "Вам необходимо войти в систему или зарегистрироваться."
       invalid: "Неверный адрес e-mail или пароль."
+      not_found_in_database: "Извините, имя пользователя и/или пароль неверны."
     sessions:
       signed_in: "Вход в систему выполнен."
+      refinery_user:
+        signed_out: Выход из системы выполнен.
   activerecord:
     models:
       refinery/authentication/devise/user: пользователь
@@ -64,7 +72,8 @@ ru:
       refinery/authentication/devise/user:
         login: Имя или почта пользователя
         username: Имя пользователя
-        email: Эл. почта
         password: Пароль
         password_confirmation: Подтверждение пароля
+        email: Эл. почта
         remember_me: Запомнить меня
+        full_name: Полное имя
