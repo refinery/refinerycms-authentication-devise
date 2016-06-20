@@ -1,5 +1,5 @@
 <div class="contextual-menu">
-  <%= render '/refinery/admin/search', :url => refinery.authentication_devise_admin_users_path %>
+  <%= render '/refinery/admin/tmp_search', :url => refinery.authentication_devise_admin_users_path %>
   <%= link_to refinery.new_authentication_devise_admin_user_path, class: "btn btn-primary" do %>
     <i class="icon icon-add"></i> <span class="hidden-xs-down"><strong><%= t('.create_new_user') %></strong></span>
   <% end %>
