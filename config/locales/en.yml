@@ -8,6 +8,8 @@ en:
       devise:
         admin:
           users:
+            index:
+              title: Users
             delete: Remove this user forever
             edit: Edit this user
             update:
@@ -18,7 +20,7 @@ en:
               role_access: Role access
               enable_all: enable all
             actions:
-              create_new_user: Add new user
+              create_new_user: New user
             user:
               email_user: Email this user
               preview: '(%{who}) added %{created_at}'
