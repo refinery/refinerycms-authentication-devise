@@ -13,6 +13,7 @@ module Refinery
           Refinery::Plugin.register do |plugin|
             plugin.pathname = root
             plugin.name = 'refinery_authentication_devise'
+            plugin.icon = 'group'
             plugin.menu_match = %r{refinery/(authentication/devise/)?users$}
             plugin.url = proc {
               Refinery::Core::Engine.routes.url_helpers.authentication_devise_admin_users_path

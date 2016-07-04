@@ -116,7 +116,11 @@ describe "sign out", :type => :feature do
   end
 
   context "when I sign out" do
-    before { click_on "Log out" }
+    before {
+      within '#sidebar-left' do
+        click_on "Log out"
+      end
+    }
 
     it "redirects me back to the sign in page" do
       expect(current_path).to eq(refinery.login_path)

@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
-  s.add_dependency 'refinerycms-core',  ['~> 3.0', '>= 3.0.0']
+  s.add_dependency 'refinerycms-core',  ['< 5.0', '>= 3.0.0']
   s.add_dependency 'actionmailer',      ['~> 4.2', '>= 4.2.0']
   s.add_dependency 'devise',            ['~> 3.0', '>= 3.2.4']
   s.add_dependency 'friendly_id',       '~> 5.1.0'
