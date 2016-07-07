@@ -6,6 +6,9 @@
     <%= content_tag(tag_name, class: 'page-title', href: refinery.edit_authentication_devise_admin_user_path(user)) do %>
       <span class='title'>
         <%= user.username %>
+        <span class='label'>
+          (<%= user.email %>)
+        </span>
       </span>
     <% end %>
 
