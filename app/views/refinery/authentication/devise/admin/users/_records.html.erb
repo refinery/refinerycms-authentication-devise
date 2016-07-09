@@ -1,4 +1,5 @@
 <div id="users-index" class="infinite-scrolling-container">
+  <%= render 'refinery/admin/search_header', :url => refinery.authentication_devise_admin_users_path %>
   <% if @users.any? %>
     <ul id='users' class='list-unstyled sortable_list'>
       <%= render 'users' %>
