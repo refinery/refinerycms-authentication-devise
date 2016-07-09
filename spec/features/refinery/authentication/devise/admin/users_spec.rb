@@ -6,7 +6,7 @@ describe "User admin page", :type => :feature do
   describe "new/create" do
     def visit_and_fill_form
       visit refinery.authentication_devise_admin_users_path
-      click_link "Add new user"
+      click_link "New user"
 
       fill_in "user[username]", :with => "test"
       fill_in "user[email]", :with => "test@example.com"
@@ -45,7 +45,7 @@ describe "User admin page", :type => :feature do
   describe "edit/update" do
     it "can update a user" do
       visit refinery.authentication_devise_admin_users_path
-      click_link "Edit this user"
+      click_link "#{logged_in_user.username}"
 
       fill_in "Username", :with => "cmsrefinery"
       fill_in "Email", :with => "cms@example.com"
@@ -60,10 +60,10 @@ describe "User admin page", :type => :feature do
       dotty_user # create the user
       visit refinery.authentication_devise_admin_users_path
 
-      expect(page).to have_css("#sortable_#{dotty_user.id}")
+      expect(page).to have_css("#user_#{dotty_user.id}")
 
-      within "#sortable_#{dotty_user.id}" do
-        click_link "Edit this user"
+      within "#user_#{dotty_user.id}" do
+        click_link dotty_user.username
       end
 
       expect(page).to have_css("form#edit_user_#{dotty_user.id}")
@@ -80,7 +80,10 @@ describe "User admin page", :type => :feature do
       expect(page).to have_selector("a[href='/refinery/users/#{user.username}']")
       expect(page).to have_no_selector("a[href='/refinery/users/#{logged_in_user.username}']")
 
-      click_link "Remove this user"
+      within "#user_#{user.id}" do
+        find("a.delete").click
+      end
+
       expect(page).to have_content("'#{user.username}' was successfully removed.")
       expect(page).to have_content("#{logged_in_user.username} (#{logged_in_user.email})")
     end

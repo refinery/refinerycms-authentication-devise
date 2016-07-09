@@ -1,23 +1,27 @@
-<li id="sortable_<%= user.id %>" class='clearfix record <%= cycle("on", "on-hover") %>'>
-  <span class='title'>
-    <strong><%= user.username %></strong>
-    <span class="preview">
-      <%= t('.preview', :who => user.email, :created_at => l(user.created_at, :format => :short)) %>
+<li class='page-listing' id="<%= dom_id(user) -%>">
+  <div class="page-row">
+    <i class="icon icon-user-1"></i>&nbsp;
+
+    <% tag_name = current_refinery_user.can_edit?(user) ? :a : :div %>
+    <%= content_tag(tag_name, class: 'page-title', href: refinery.edit_authentication_devise_admin_user_path(user)) do %>
+      <span class='title'>
+        <%= user.username %> (<%= user.email %>)
+      </span>
+    <% end %>
+
+    <span class='actions'>
+      <% if current_refinery_user.can_delete?(user) %>
+        <span class="delete pull-right">
+          <%= link_to refinery.authentication_devise_admin_user_path(user),
+                      :class => "cancel confirm-delete circle-icon delete",
+                      :method => :delete,
+                      :data => {
+                        :confirm => t('message', :scope => 'refinery.authentication.devise.admin.delete', :title => user.username)
+                      } do %>
+            <i class="icon icon-trash p-t-0"></i>
+          <% end %>
+        </span>
+      <% end %>
     </span>
-  </span>
-  <span class='actions'>
-    <%= mail_to user.email, refinery_icon_tag('email_go.png'),
-                :title => t('.email_user') %>
-    <%= link_to refinery_icon_tag('application_edit.png'),
-                refinery.edit_authentication_devise_admin_user_path(user),
-                :title => t('edit', :scope => 'refinery.authentication.devise.admin.users') if current_refinery_user.can_edit?(user) %>
-    <%= link_to refinery_icon_tag('delete.png'),
-                refinery.authentication_devise_admin_user_path(user),
-                :class => "cancel confirm-delete",
-                :title => t('delete', :scope => 'refinery.authentication.devise.admin.users'),
-                :method => :delete,
-                :data => {
-                  :confirm => t('message', :scope => 'refinery.authentication.devise.admin.delete', :title => user.username)
-                } if current_refinery_user.can_delete?(user) %>
-  </span>
+  </div>
 </li>
