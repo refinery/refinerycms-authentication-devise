@@ -3,7 +3,10 @@ module Refinery
     module Devise
       class Role < Refinery::Core::BaseModel
 
-        has_and_belongs_to_many :users, :join_table => :refinery_authentication_devise_roles_users
+        # Make table_name initializable (necessary for update of pre-authentication-devise-gem apps)
+        self.table_name = Refinery::Authentication::Devise.refinery_roles_tablename
+
+        has_and_belongs_to_many :users, :join_table => Refinery::Authentication::Devise.refinery_roles_users_tablename
 
         before_validation :camelize_title
         validates :title, :uniqueness => true

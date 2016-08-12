@@ -5,4 +5,14 @@ Refinery::Authentication::Devise.configure do |config|
 
   # Configure notification email from name
   # config.email_from_name = <%= Refinery::Authentication::Devise.email_from_name.inspect %>
+
+  # Configure some database names
+  #  This is only necessary, if you need to update your old app to using the refinerycms-authentication-devise gem
+  # 
+  #  In "old" applications, database names differed, so IFF you are trying to update, you can use the following two
+  #  directives as a starting point:
+  # 
+  #  config.refinery_roles_users_tablename = :refinery_roles_users
+  #  config.refinery_roles_tablename = :refinery_roles
+
 end
