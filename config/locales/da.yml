@@ -54,6 +54,8 @@ da:
         roles:
           superuser: Administrator
           refinery: Refinery
+        delete:
+          message: "Er du sikker på du vil slette brugeren %{title} ?"
   devise:
     failure:
       unauthenticated: Du skal logge ind for at kunne fortsætte.
