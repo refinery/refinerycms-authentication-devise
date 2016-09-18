@@ -9,6 +9,7 @@ da:
         admin:
           users:
             delete: Slet bruger
+              message: Er du sikker på du vil slette brugeren?
             edit: Redigér bruger
             update:
               lockout_prevented: "Du kan ikke deaktivere 'Brugere' for en bruger, der er logget på."
