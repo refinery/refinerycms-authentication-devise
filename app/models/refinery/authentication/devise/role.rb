@@ -3,7 +3,8 @@ module Refinery
     module Devise
       class Role < Refinery::Core::BaseModel
 
-        has_and_belongs_to_many :users, :join_table => :refinery_authentication_devise_roles_users
+        has_many :roles_users, class_name: 'Refinery::Authentication::Devise::RolesUsers'
+        has_many :users, through: :roles_users, class_name: 'Refinery::Authentication::Devise::User'
 
         before_validation :camelize_title
         validates :title, :uniqueness => true
