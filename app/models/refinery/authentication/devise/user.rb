@@ -8,7 +8,8 @@ module Refinery
 
         extend FriendlyId
 
-        has_and_belongs_to_many :roles, join_table: :refinery_authentication_devise_roles_users
+        has_many :roles_users, class_name: 'Refinery::Authentication::Devise::RolesUsers'
+        has_many :roles, through: :roles_users, class_name: 'Refinery::Authentication::Devise::Role'
 
         has_many :plugins, -> { order('position ASC') },
                            class_name: "Refinery::Authentication::Devise::UserPlugin", dependent: :destroy
