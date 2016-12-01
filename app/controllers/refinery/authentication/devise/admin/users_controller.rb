@@ -6,12 +6,15 @@ module Refinery
 
           crudify :'refinery/authentication/devise/user',
                   :order => 'username ASC',
+                  :searchable => false,
                   :title_attribute => 'username'
 
           before_action :find_available_plugins, :find_available_roles,
                         :only => [:new, :create, :edit, :update]
           before_action :redirect_unless_user_editable!, :only => [:edit, :update]
           before_action :exclude_password_assignment_when_blank!, :only => :update
+          before_action :check_user,               :only => [:update]
+          before_action :set_tmp_password,         :only => [:create]
 
           def new
             @user = Refinery::Authentication::Devise::User.new
@@ -24,6 +27,9 @@ module Refinery
             @selected_role_names = params[:user][:roles] || []
 
             if @user.save
+              flash.now[:notice]  = "Invitation sent to #{@user.email}"
+              @user.inviting_user = current_refinery_user.username.split.map(&:capitalize).join(' ')
+              @user.send_reset_password_instructions
               create_successful
             else
               create_failed
@@ -31,7 +37,9 @@ module Refinery
           end
 
           def edit
+            @submit_button_text = 'Update'
             @selected_plugin_names = find_user.plugins.map(&:name)
+            @edit_user = true
           end
 
           def update
@@ -57,6 +65,10 @@ module Refinery
 
           protected
 
+          def redirect_url
+            refinery.authentication_devise_admin_users_path
+          end
+
           def create_successful
             @user.plugins = @selected_plugin_names
 
@@ -68,7 +80,7 @@ module Refinery
               @user.add_role :refinery
             end
 
-            redirect_to refinery.authentication_devise_admin_users_path,
+            redirect_to redirect_url,
                         :notice => t('created', :what => @user.username, :scope => 'refinery.crudify')
           end
 
@@ -77,11 +89,16 @@ module Refinery
           end
 
           def update_successful
-            redirect_to refinery.authentication_devise_admin_users_path,
+            if params[:user][:password] && @user.id == current_refinery_user.id
+              sign_in @user, :bypass => true
+            end
+
+            redirect_to redirect_url,
                         :notice => t('updated', :what => @user.username, :scope => 'refinery.crudify')
           end
 
           def update_failed
+            @edit_user = true
             user_memento_rollback!
 
             render :edit
@@ -139,6 +156,21 @@ module Refinery
               :email, :password, :password_confirmation, :remember_me, :username,
               :login, :full_name, plugins: []
             )
+          end
+
+          def check_user
+            unless current_refinery_user.plugins.map(&:name).include?('refinery_users') ||
+                @user.username == current_refinery_user.username ||
+                current_refinery_user.super_user?
+              logger.warn "Someone without permission tried to modify user #{@user.inspect}"
+              flash.now[:error] = 'Sorry, you may not access that'
+              return redirect_to redirect_url
+            end
+          end
+
+          def set_tmp_password
+            params[:user][:password] = ::Devise.friendly_token
+            params[:user][:password_confirmation] = params[:user][:password]
           end
         end
       end

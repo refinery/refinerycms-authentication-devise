@@ -280,7 +280,8 @@ module Refinery
 
           it "adds registered plugins" do
             expect(first_user.plugins.collect(&:name)).to eq(
-              %w(refinery_pages refinery_files refinery_images refinery_authentication_devise)
+              %w(refinery_pages refinery_authentication_devise)
+              # GLASS: refinery_files && refinery_images are hidden, access from within content editing
             )
           end
 

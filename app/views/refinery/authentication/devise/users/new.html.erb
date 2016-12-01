@@ -2,23 +2,21 @@
 
 <%= form_for :user, :url => refinery.signup_path do |f| -%>
 
+  <h5 class="gray-6">Please create the first account.</h5>
+
   <%= render '/refinery/admin/error_messages', :object => @user, :include_object_name => true %>
 
-  <div class='field'>
-    <%= f.label :username %>
-    <%= f.text_field :username, :class => 'larger widest' %>
+  <div class='form-group'>
+    <%= f.text_field :username, :placeholder => 'Full name', :class => 'form-control form-control-lg', 'autofocus' => 'autofocus' %>
   </div>
-  <div class='field'>
-    <%= f.label :email %>
-    <%= f.text_field :email, :class => 'larger widest' %>
+  <div class='form-group'>
+    <%= f.text_field :email, :placeholder => 'Email', :class => 'form-control form-control-lg' %>
   </div>
-  <div class='field'>
-    <%= f.label :password %>
-    <%= f.password_field :password, :class => 'larger widest' %>
+  <div class='form-group'>
+    <%= f.password_field :password, :placeholder => 'Password', :class => 'form-control form-control-lg' %>
   </div>
-  <div class='field'>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :class => 'larger widest' %>
+  <div class='form-group'>
+    <%= f.password_field :password_confirmation, :placeholder => 'Password confirmation', :class => 'form-control form-control-lg' %>
   </div>
 
   <%= render '/refinery/admin/form_actions', :f => f,

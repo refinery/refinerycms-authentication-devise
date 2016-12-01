@@ -65,6 +65,9 @@ en:
       signed_in: Signed in successfully.
       refinery_user:
         signed_out: Signed out successfully.
+    passwords:
+      authentication_devise_user:
+        expired_token: Sorry, your invitation has expired. Please request a new one.
   activerecord:
     models:
       refinery/authentication/devise/user: user
