@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
   s.add_dependency 'refinerycms-core',  ['>= 3.0.0', '< 5.0']
-  s.add_dependency 'actionmailer',      ['>= 5.0.0', '< 5.1']
+  s.add_dependency 'actionmailer',      ['>= 5.0.0', '< 5.2']
   s.add_dependency 'devise',            ['~> 4.0', '>= 4.3.0']
   s.add_dependency 'friendly_id',       '~> 5.2.1'
 
