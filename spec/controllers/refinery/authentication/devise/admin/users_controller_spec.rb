@@ -34,7 +34,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       user = Refinery::Authentication::Devise::User.new :username => "bob"
       expect(user).to receive(:save).once{ true }
       expect(Refinery::Authentication::Devise::User).to receive(:new).once.with(instance_of(ActionController::Parameters)){ user }
-      post :create, :user => {:username => 'bobby'}
+      post :create, params: { user: { username: 'bobby' } }
       expect(response).to be_redirect
     end
 
@@ -44,7 +44,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       user = Refinery::Authentication::Devise::User.new :username => "bob"
       expect(user).to receive(:save).once{ false }
       expect(Refinery::Authentication::Devise::User).to receive(:new).once.with(instance_of(ActionController::Parameters)){ user }
-      post :create, :user => {:username => 'bobby'}
+      post :create, params: { user: { username: 'bobby' } }
       expect(response).to be_success
       expect(response).to render_template("refinery/authentication/devise/admin/users/new")
     end
@@ -54,7 +54,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
     refinery_login_with_devise [:refinery, :superuser]
 
     it "renders the edit template" do
-      get :edit, :id => logged_in_user.id
+      get :edit, params: { id: logged_in_user.id }
       expect(response).to be_success
       expect(response).to render_template("refinery/authentication/devise/admin/users/edit")
     end
@@ -67,13 +67,13 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
 
     let(:additional_user) { FactoryGirl.create :authentication_devise_refinery_user }
     it "updates a user" do
-      patch "update", :id => additional_user.id.to_s, :user => {:username => 'bobby'}
+      patch :update, params: { id: additional_user.id.to_s, user: { username: 'bobby' } }
       expect(response).to be_redirect
     end
 
     context "when specifying plugins" do
       it "won't allow to remove 'Users' plugin from self" do
-        patch "update", :id => logged_in_user.id.to_s, :user => {:plugins => ["some plugin"]}
+        patch :update, params: { id: logged_in_user.id.to_s, user: { plugins: ["some plugin"] } }
 
         expect(flash[:error]).to eq("You cannot remove the 'Users' plugin from the currently logged in account.")
       end
@@ -81,7 +81,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       it "will update to the plugins supplied" do
         expect(logged_in_user).to receive(:update_attributes).with({"plugins" => %w(refinery_authentication_devise some_plugin)})
         allow(Refinery::Authentication::Devise::User).to receive_message_chain(:includes, :find) { logged_in_user }
-        patch "update", :id => logged_in_user.id.to_s, :user => {:plugins => %w(refinery_authentication_devise some_plugin)}
+        patch :update, params: { id: logged_in_user.id.to_s, user: { plugins: %w(refinery_authentication_devise some_plugin) } }
       end
     end
 

@@ -2,8 +2,10 @@ source "https://rubygems.org"
 
 gemspec
 
-git "https://github.com/refinery/refinerycms", branch: "3-0-stable" do
+git "https://github.com/refinery/refinerycms", branch: "feature/rails-5" do
   gem "refinerycms"
+
+  gem "refinerycms-i18n", git: "https://github.com/refinery/refinerycms-i18n", branch: "master"
 
   group :test do
     gem "refinerycms-testing"
@@ -34,10 +36,6 @@ group :assets do
   gem "sass-rails"
   gem "coffee-rails"
   gem "uglifier"
-end
-
-group :development do
-  gem 'quiet_assets'
 end
 
 group :test do
