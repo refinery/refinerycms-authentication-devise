@@ -1,4 +1,4 @@
-class CreateRefinerycmsAuthenticationSchema < ActiveRecord::Migration
+class CreateRefinerycmsAuthenticationSchema < ActiveRecord::Migration[4.2]
   def change
     # Postgres apparently requires the roles_users table to exist before creating the roles table.
     create_table :refinery_roles_users, :id => false do |t|
