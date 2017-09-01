@@ -13,6 +13,9 @@ describe "password recovery", :type => :feature do
     it "shows success message" do
       visit refinery.new_authentication_devise_user_password_path
       fill_in "authentication_devise_user_email", :with => user.email
+      expect(Refinery::Authentication::Devise::UserMailer)
+        .to receive(:reset_notification)
+        .and_return(double(deliver_now: true, deliver_later: true))
       click_button "Reset password"
       expect(page).to have_content("An email has been sent to you with a link to reset your password.")
     end
