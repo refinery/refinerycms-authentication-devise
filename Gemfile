@@ -2,10 +2,8 @@ source "https://rubygems.org"
 
 gemspec
 
-git "https://github.com/refinery/refinerycms", branch: "feature/rails-5" do
+git "https://github.com/refinery/refinerycms", branch: "master" do
   gem "refinerycms"
-
-  gem "refinerycms-i18n", git: "https://github.com/refinery/refinerycms-i18n", branch: "master"
 
   group :test do
     gem "refinerycms-testing"

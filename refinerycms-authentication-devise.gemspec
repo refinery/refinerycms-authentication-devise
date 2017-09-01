@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform          = Gem::Platform::RUBY
   s.name              = %q{refinerycms-authentication-devise}
-  s.version           = %q{1.0.4}
+  s.version           = %q{2.0.0}
   s.summary           = %q{Devise based authentication extension for Refinery CMS}
   s.description       = %q{A Devise authentication extension for Refinery CMS}
   s.homepage          = %q{http://refinerycms.com}
@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'devise',            ['~> 4.0', '>= 4.3.0']
   s.add_dependency 'friendly_id',       '~> 5.2.1'
 
-  s.required_ruby_version = '>= 2.0.0'
+  s.required_ruby_version = '>= 2.2.2'
 end
