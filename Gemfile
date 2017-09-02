@@ -36,6 +36,10 @@ group :assets do
   gem "uglifier"
 end
 
+group :development do
+  gem 'listen'
+end
+
 group :test do
   gem "launchy"
 end
