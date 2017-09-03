@@ -1,8 +1,8 @@
 <% # setup params for various action links
-  edit_url =  refinery.edit_authentication_devise_admin_user_path(user)
-  delete_url = refinery.authentication_devise_admin_user_path(user)
-  delete_options = {
-     method: :delete, 
+  edit_url ||=  refinery.edit_authentication_devise_admin_user_path(user)
+  delete_url ||= refinery.authentication_devise_admin_user_path(user)
+  delete_options ||= {
+     method: :delete,
      class: "cancel confirm-delete",
             data: {confirm: t('message',  scope: 'refinery.authentication.devise.delete', title: user.username)}
           }
