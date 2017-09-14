@@ -1,13 +1,13 @@
-# Refinery CMS Authentication Extension for Devise
+# Refinery CMS Authentication Extension for Devise [![Build Status](https://travis-ci.org/refinery/refinerycms-authentication-devise.svg?branch=master)](https://travis-ci.org/refinery/refinerycms-authentication-devise)
 
-This extension allows you to use Devise with Refinery CMS 3.0 and later.
+This extension allows you to use Devise with Refinery CMS 4.0 and later.
 
 ## Usage
 
 Simply put this in the Gemfile of your Refinery application:
 
 ```ruby
-gem 'refinerycms-authentication-devise', '~> 1.0.4'
+gem 'refinerycms-authentication-devise', '~> 2.0.0'
 ```
 
 Then run `bundle install` to install it.

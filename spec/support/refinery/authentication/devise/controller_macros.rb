@@ -3,7 +3,7 @@ module Refinery
     module Devise
       module ControllerMacros
         def self.extended(base)
-          base.send :include, ::Devise::TestHelpers
+          base.send :include, ::Devise::Test::ControllerHelpers
         end
 
         def refinery_login_with_devise(*roles)

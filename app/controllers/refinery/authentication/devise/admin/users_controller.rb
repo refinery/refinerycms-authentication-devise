@@ -48,7 +48,7 @@ module Refinery
             store_user_memento
 
             @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.downcase] }
-            if @user.update_attributes user_params
+            if @user.update_attributes user_params.to_h
               update_successful
             else
               update_failed
@@ -106,7 +106,7 @@ module Refinery
           private
           def exclude_password_assignment_when_blank!
             if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-              params[:user].except!(:password, :password_confirmation)
+              params[:user].extract!(:password, :password_confirmation)
             end
           end
 

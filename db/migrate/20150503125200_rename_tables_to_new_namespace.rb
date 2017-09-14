@@ -1,4 +1,4 @@
-class RenameTablesToNewNamespace < ActiveRecord::Migration
+class RenameTablesToNewNamespace < ActiveRecord::Migration[4.2]
   def change
     remove_index :refinery_user_plugins, [:user_id, :name]
     add_index :refinery_user_plugins, [:user_id, :name], unique: true,

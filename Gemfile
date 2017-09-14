@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-git "https://github.com/refinery/refinerycms", branch: "3-0-stable" do
+git "https://github.com/refinery/refinerycms", branch: "master" do
   gem "refinerycms"
 
   group :test do
@@ -37,7 +37,7 @@ group :assets do
 end
 
 group :development do
-  gem 'quiet_assets'
+  gem 'listen'
 end
 
 group :test do
