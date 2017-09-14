@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary           = %q{Devise based authentication extension for Refinery CMS}
   s.description       = %q{A Devise authentication extension for Refinery CMS}
   s.homepage          = %q{http://refinerycms.com}
-  s.authors           = ['Philip Arndt', 'Rob Yurkowski']
+  s.authors           = ['Philip Arndt', 'Brice Sanchez', 'Rob Yurkowski']
   s.license           = %q{MIT}
   s.require_paths     = %w(lib)
 
