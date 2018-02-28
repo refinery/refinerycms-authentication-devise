@@ -65,7 +65,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
   describe "#update" do
     refinery_login_with_devise [:refinery, :superuser]
 
-    let(:additional_user) { FactoryGirl.create :authentication_devise_refinery_user }
+    let(:additional_user) { FactoryBot.create :authentication_devise_refinery_user }
     it "updates a user" do
       patch :update, params: { id: additional_user.id.to_s, user: { username: 'bobby' } }
       expect(response).to be_redirect
