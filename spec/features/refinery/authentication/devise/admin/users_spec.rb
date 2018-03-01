@@ -55,7 +55,7 @@ describe "User admin page", :type => :feature do
       expect(page).to have_content("cmsrefinery (cms@example.com)")
     end
 
-    let(:dotty_user) { FactoryGirl.create(:authentication_devise_refinery_user, :username => 'user.name.with.lots.of.dots') }
+    let(:dotty_user) { FactoryBot.create(:authentication_devise_refinery_user, :username => 'user.name.with.lots.of.dots') }
     it "accepts a username with a '.' in it" do
       dotty_user # create the user
       visit refinery.authentication_devise_admin_users_path
@@ -72,7 +72,7 @@ describe "User admin page", :type => :feature do
 
   describe "destroy" do
     let!(:user) {
-      FactoryGirl.create(:authentication_devise_refinery_user, username: "ugisozols")
+      FactoryBot.create(:authentication_devise_refinery_user, username: "ugisozols")
     }
 
     it "can only destroy regular users" do
