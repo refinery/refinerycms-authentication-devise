@@ -44,7 +44,6 @@ hu:
             enter_email_address: Add meg a fiókodhoz tartozó email címed.
             reset_password: Jelszó helyreállítás
             blank_email: Nem adtál meg email címet.
-            email_not_associated_with_account_html: "Sajnáljuk, '%{email}' egyik fiókhoz sincs társítva.<br />Biztosan helyes email címet írtál be?"
             email_reset_sent: 'Elküldünk egy levelet neked, ami tartalmazza a helyreállításhoz szükséges webcímet.'
             password_encryption: 'Újra be kell állítanod a jelszavad, mert változtatások történtek a Refinery által használt jelszó titkosító módszerben, így a jelszavak még nagyobb biztonságban lesznek.'
           reset:

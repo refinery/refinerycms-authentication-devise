@@ -38,7 +38,6 @@ vi:
             enter_email_address: Xin vui lòng nhận địa chỉ thư điện tử cho tài khoản cuả bạn.
             reset_password: Khởi tạo lại mật khẩu
             blank_email: Bạn chưa nhập địa chỉ thư điện tử.
-            email_not_associated_with_account_html: "Xin lỗi, '%{email}' không có trong hệ thống.<br />Bạn có chắc là đã nhập đúng địa chỉ thư điện tử?"
             email_reset_sent: Thử điện tử chứa đường dẫn để khởi tạo lại mật khẩu vừa được gửi tới bạn.
             password_encryption: Bạn cần khởi tạo lại mật khẩu vì có thay đổi trong cách chúng tôi mã khoá mật khẩu.
           reset:

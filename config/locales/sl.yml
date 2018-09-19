@@ -37,7 +37,6 @@ sl:
             enter_email_address: Prosimo vnesite email naslov za vaš račun.
             reset_password: Ponastavi geslo
             blank_email: Niste vnesli email naslova.
-            email_not_associated_with_account_html: "Oprostite, '%{email}' ni povezan z nobenim računom.<br/>Ali ste prepričani, a ste vnesli pravilen naslov?"
             email_reset_sent: Poslali smo vam email sporočilo s povezavo za ponastavitev gesla.
             password_encryption: 'Morate ponastaviti geslo, ker je prišlo do sprememb v metodah šifriranja gesla, ki jih uporablja Refinery tako, da so gesla shranjenja še z močnejšo enkripcijo kot prej.'
           reset:

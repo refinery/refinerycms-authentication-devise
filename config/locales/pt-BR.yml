@@ -38,7 +38,6 @@ pt-BR:
             enter_email_address: "Por favor, preencha o endereço de email da sua conta."
             reset_password: Recuperar senha
             blank_email: Você não preencheu um endereço de e-mail.
-            email_not_associated_with_account_html: "Desculpe, '%{email}' não está associado com alguma conta. <br/>Tem certeza que você digitou o endereço de email correto?"
             email_reset_sent: Um email foi enviado para você com um link para recuperar sua senha.
             password_encryption: Você precisa redefinir sua senha pois existem mudanças nos métodos de criptografia usados pelo Refinery, as senhas são armazenadas com uma encriptação maior do que anteriormente.
           reset:

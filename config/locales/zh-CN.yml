@@ -38,7 +38,6 @@ zh-CN:
             enter_email_address: 请为您的帐号输入邮件地址.
             reset_password: 重置密码
             blank_email: 您没有输入邮件地址.
-            email_not_associated_with_account_html: "对不起, '%{email}' 并没有关联到任何的帐号.<br />您确认输入了正确的邮件地址?"
             email_reset_sent: 一封包含有重置密码链接的邮件已经发送到您的邮箱.
             password_encryption: '请重置您的密码. （为了更好的安全性，Refinery 改进了加密算法, 您需要重置密码使之生效）'
           reset:

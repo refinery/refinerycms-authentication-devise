@@ -36,7 +36,6 @@ lt:
             enter_email_address: Prašome nurodyti el. pašto adresą savo paskyrai.
             reset_password: Slaptažodžio keitimas
             blank_email: Jūs neįvedėte slaptažodžio
-            email_not_associated_with_account_html: "Atsiprašome, '%{email}' nėra susietas su jokia paskyra.<br />Ar tikrai nurodėte teisingą el. pašto adresą?"
             email_reset_sent: El. laiškas buvo nusiųstas jums su nuoroda kur galite pakeisti slaptažodį.
           reset:
             successful: "'%{email}' slaptažodis sėkmingai atnaujintas"

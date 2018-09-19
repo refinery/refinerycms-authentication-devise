@@ -38,7 +38,6 @@ zh-TW:
             enter_email_address: 請為您的帳號輸入電子郵件地址
             reset_password: 重設密碼
             blank_email: 您沒有輸入電子郵件地址.
-            email_not_associated_with_account_html: "抱歉, '%{email}' 不是任何帳號的電子郵件地址.<br />您確定輸入了正確的電子郵件地址嗎?"
             email_reset_sent: 一封附上可重設您密碼的連結的電子郵件已經寄給您
             password_encryption: "因為 Refinery 有些密碼加密演算法的改變, 所以您必須重設您的密碼, 如此您的密碼會比以往更安全地儲存著."
           reset:

@@ -44,7 +44,6 @@ sk:
             enter_email_address: Prosím zadajte emailovú adresu.
             reset_password: Resetovať heslo
             blank_email: Musíte zadať emailovú adresu.
-            email_not_associated_with_account_html: "Email '%{email}' nie je asociovaný z žiadnym užívateľským kontom.<br />Ste si istí, že ste použili správnu adresu?"
             email_reset_sent: Bol vám zaslaný email s odkazom na resetovanie hesla.
             password_encryption: 'Musíte si zmeniť heslo, pretože nastala zmena v šifrovacie metóde uložených hesiel. Refinery sa stáva viac bezpečnejšie ako predtým.'
           reset:

@@ -38,7 +38,6 @@ ja:
             enter_email_address: メールアドレスを記入して下さい。
             reset_password: パスワードのリセット
             blank_email: メールアドレス欄が空欄です
-            email_not_associated_with_account_html: "「%{email}」は記録に無いアドレスです。<br />今一度確認して下さい。"
             email_reset_sent: パスワードをリセットする為のリンクをメールで送信しました。
             password_encryption: パスワードの暗号が強化されましたので、パスワードをリセットする必要があります。
           reset:

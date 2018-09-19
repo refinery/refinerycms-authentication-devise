@@ -44,7 +44,6 @@ en:
             enter_email_address: Please enter the email address for your account.
             reset_password: Reset password
             blank_email: You did not enter an email address.
-            email_not_associated_with_account_html: "Sorry, '%{email}' isn't associated with any accounts.<br />Are you sure you typed the correct email address?"
             email_reset_sent: An email has been sent to you with a link to reset your password.
             password_encryption: You need to reset your password because there were changes in the password encryption methods that Refinery uses so that passwords are stored with even stronger encryption than before.
           reset:

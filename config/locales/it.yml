@@ -44,7 +44,6 @@ it:
             enter_email_address: "Inserisci l'indirizzo di posta elettronica per l'utente."
             reset_password: Reimpostazione della password
             blank_email: "Non hai inserito l'indirizzo email."
-            email_not_associated_with_account_html: "Spiacenti, '%{email}' non è associato ad alcun account. <br/>Sei sicuro di aver scritto l'indirizzo email corretto?"
             email_reset_sent: Ti è stata inviata una e-mail con il link per reimpostare la password.
             password_encryption: "È necessario reimpostare la password, poiché ci sono stati cambiamenti nei metodi di crittografia della password, in modo da rendere più sicuro l'accesso."
           reset:
