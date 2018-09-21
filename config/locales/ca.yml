@@ -44,7 +44,6 @@ ca:
             enter_email_address: "Indica l'e-mail del teu compte."
             reset_password: Resetear contrasenya
             blank_email: No has indicat un e-mail vàlid.
-            email_not_associated_with_account_html: "Perdò, però, '%{email}' no està associat a cap compte.<br />Segur que ho has teclejat correctament?"
             email_reset_sent: "T'hem enviat un e-mail amb un enllaç per canviar la teva contrasenya."
             password_encryption: "Necessites restablir la teva contrasenya perque va haver-hi canvis en els mètodes d'encriptació de contrasenyes que Refinery usa, ja que ara les contrasenyes són emmagatzemades amb una encriptació més forta que abans."
           reset:

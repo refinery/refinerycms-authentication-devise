@@ -38,7 +38,6 @@ es:
             enter_email_address: Indica el e-mail de tu cuenta.
             reset_password: Resetear contraseña
             blank_email: No has indicado un e-mail válido.
-            email_not_associated_with_account_html: "Lo siento, el e-mail '%{email}' no está asociado a ninguna cuenta.<br />¿Seguro que lo has tecleado correctamente?"
             email_reset_sent: Te hemos enviado un e-mail con un enlace para cambiar tu contraseña.
             password_encryption: Necesitas restablecer tu contraseña debido a que hubo cambios en los métodos de encriptación de contraseñas que Refinery usa, ya que ahora las contraseñas son almacenadas con una encriptación más fuerte que antes.
           reset:

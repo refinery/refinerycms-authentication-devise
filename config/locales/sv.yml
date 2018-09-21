@@ -38,7 +38,6 @@ sv:
             enter_email_address: Var god fyll i e-postadress för ditt konto.
             reset_password: Återställ lösenord
             blank_email: Du fyllde inte i någon e-postadress.
-            email_not_associated_with_account_html: "Tyvärr, '%{email}' finns inte med i systemet.<br />Är du säker på att du fyllde i rätt e-postadress?"
             email_reset_sent: Ett e-post har skickats till dig med instruktioner om hur du återställer ditt lösenord.
             password_encryption: Du måste sätta ett nytt lösenord. Detta på grund av att krypteringmetoden som Refinery använder sig av har bytts ut mot en bättre och säkrare kryptering.
           reset:

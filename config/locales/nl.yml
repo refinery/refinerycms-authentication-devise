@@ -44,7 +44,6 @@ nl:
             enter_email_address: Vul het e-mailadres van uw account in.
             reset_password: Een nieuw wachtwoord aanvragen
             blank_email: Uw heeft geen e-mailadres ingevuld.
-            email_not_associated_with_account_html: "Sorry, '%{email}' is niet gekoppeld aan een account. <br/>Weet u zeker dat u het juiste e-mailadres heeft ingevuld?"
             email_reset_sent: Er is een e-mail naar u verzonden met een link om een nieuw wachtwoord in te stellen.
             password_encryption: 'U moet een nieuw wachtwoord instellen omdat de wachtwoordversleuteling van Refinery is verbeterd, hiermee wordt uw wachtwoord nog veiliger opgeslagen.'
           reset:

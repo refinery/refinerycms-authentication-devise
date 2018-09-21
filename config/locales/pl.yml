@@ -38,7 +38,6 @@ pl:
             enter_email_address: Proszę podaj adres e-mail dla Twojego konta.
             reset_password: Reset hasła
             blank_email: Nie podano żadnego adresu e-mail.
-            email_not_associated_with_account_html: "Przepraszamy, '%{email}' nie jest adresem żadnego z zarejestrowanych użytkownikiem. <br />Czy to na pewno prawidłowy adres?"
             email_reset_sent: Został wysłany e-mail z linkiem umożliwiającym reset hasła.
             password_encryption: Musisz zmienić swoje hasło ponieważ wprowadziliśmy zmiany w używanej w Rafinery metodzie szyfrowania. Teraz hasła są jeszcze lepiej chronione.
           reset:

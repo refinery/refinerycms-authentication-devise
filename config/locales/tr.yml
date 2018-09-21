@@ -44,7 +44,6 @@ tr:
             enter_email_address: Lutfen hesabiniz icin E-posta Adresinizi girin.
             reset_password: Parolayi Sifirla
             blank_email: Herhangi bir e-posta adresi girmediniz
-            email_not_associated_with_account_html: "Uzgunum, '%{email}' adli postayla iliskili herhangi bir hesap bulunamadi.<br />Dogru bir e-posta adresi girdiginizden emin misin?"
             email_reset_sent: Sifrenizi sifirlamak icin e-posta gonderilmistir.
             password_encryption: Sifreni sifirlamak zorundasin cunku Refinery nin sifreleme metodundaki  degisikliklerden daha guclu bir sifreleme metodu kayitlandi.
           reset:

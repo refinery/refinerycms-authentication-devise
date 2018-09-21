@@ -38,7 +38,6 @@ fi:
             enter_email_address: Kirjoita tunnuksesi sähköpostiosoite.
             reset_password: Nollaa salasana
             blank_email: Et kirjoittanut sähköpostiosoitetta.
-            email_not_associated_with_account_html: "Valitettavasti osoitetta '%{email}' ei löydy tietokannasta.<br />Oletko varma, että kirjoitit oikean osoitteen?"
             email_reset_sent: "Sinulle on lähetetty sähköposti, jonka kautta voit vaihtaa salasanan."
             password_encryption: "Sinun täytyy vaihtaa salasanasi, koska Refineryn käyttämää salausmenetelmää on vaihdettu turvallisuussyistä."
           reset:

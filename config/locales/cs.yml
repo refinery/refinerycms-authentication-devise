@@ -44,7 +44,6 @@ cs:
             enter_email_address: "Prosím, zadejte emailovou adresu."
             reset_password: Resetovat heslo
             blank_email: Musíte zadat emailovou adresu.
-            email_not_associated_with_account_html:  "Email '%{email}' není asociován z žádným uživatelským kontem.<br />Jste si jisti, že jste použili správnou adresu?"
             email_reset_sent: Byl vám odeslán email s odkazem na resetování hesla.
             password_encryption: 'Musíte si změnit heslo, protože nastala změna v šifrovací metodě ukládáných hesel. Refinery se stává více bezpečnější než dříve.'
           reset:

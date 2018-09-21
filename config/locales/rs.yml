@@ -38,7 +38,6 @@ rs:
             enter_email_address: Molimo unesi email adresu za tvoj nalog.
             reset_password: Resetuj lozinku
             blank_email: Nisi uneo email adresu.
-            email_not_associated_with_account_html: "Izvini, '%{email}' ne pripada nijednom nalogu.<br />Da li si siguran da si ukucao tačnu email adresu?"
             email_reset_sent: Poslat ti je mail sa linkom za resetovanje lozinke.
             password_encryption: "Moraš da resetuješ lozinku, zato što je došlo do promene u metodama za enkripciju koje Refinery koristi za zaštitu podataka.Podaci će od sada biti sigurniji nego ranije."
           reset:

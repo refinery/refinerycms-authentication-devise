@@ -44,7 +44,6 @@ pt:
             enter_email_address: Por favor escreva o email para a sua conta.
             reset_password: Reset da password
             blank_email: Não inseriu nenhum email.
-            email_not_associated_with_account_html: "Desculpe, '%{email}' não está associado a nenhuma conta.<br />Tem a certeza de que escreveu o email correcto??"
             email_reset_sent: Um email foi enviado com um link para fazer reset à password.
             password_encryption: Deve pedir um reset à sua password pois houveram alterações à forma como a plataforma encripta as passwords.
           reset:

@@ -49,7 +49,6 @@ fr:
             enter_email_address: Veuillez entrer votre adresse courriel.
             reset_password: Changer le mot de passe
             blank_email: Vous n'avez pas entré d'adresse courriel.
-            email_not_associated_with_account_html: "Désolé, '%{email}' n'est asssocié à aucun compte.<br />Êtes-vous sûr d'avoir correctement entré votre adresse courriel?"
             email_reset_sent: Un courriel vous a été envoyé. Il contient un lien vous permettant de changer votre mot de passe.
             password_encryption: Vous devez modifier votre mot de passe car Refinery utilise de nouvelles méthodes de cryptage. Les nouveaux mots de passe seront stockés avec un niveau de sécurité plus élevé.
           reset:
