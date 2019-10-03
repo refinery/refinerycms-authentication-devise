@@ -17,16 +17,16 @@ module Refinery
             end
 
             it "adds a Role to the User when role not yet assigned to User" do
-              expect(proc {
+              expect {
                 user.add_role(:new_role)
-              }).to change(user.roles, :count).by(1)
+              }.to change(user.roles, :count).by(1)
               expect(user.roles.collect(&:title)).to include("NewRole")
             end
 
             it "does not add a Role to the User when this Role is already assigned to User" do
-              expect(proc {
+              expect {
                 refinery_user.add_role(:refinery)
-              }).not_to change(refinery_user.roles, :count)
+              }.not_to change(refinery_user.roles, :count)
               expect(refinery_user.roles.collect(&:title)).to include("Refinery")
             end
           end
