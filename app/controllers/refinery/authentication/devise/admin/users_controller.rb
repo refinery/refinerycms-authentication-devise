@@ -37,7 +37,7 @@ module Refinery
           def update
             # Store what the user selected.
             @selected_role_names = params[:user].delete(:roles) || []
-            @selected_role_names = @user.roles.select(:title).map(&:title) unless user_can_assign_roles?
+            @selected_role_names = @user.roles.pluck(:title) unless user_can_assign_roles?
             @selected_plugin_names = params[:user][:plugins]
 
             if user_is_locking_themselves_out?
@@ -47,7 +47,7 @@ module Refinery
 
             store_user_memento
 
-            @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.downcase] }
+            @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.underscore] }
             if @user.update_attributes user_params.to_h
               update_successful
             else
