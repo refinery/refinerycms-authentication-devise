@@ -1,0 +1,51 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        architecture: [x64]
+        database: [postgresql]
+        ruby: ['2.6.x']
+      fail-fast: false
+      max-parallel: 10
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: actions/setup-ruby@v1
+      with:
+        architecture: ${{ matrix.architecture }}
+        ruby-version: ${{ matrix.ruby }}
+        version: ${{ matrix.ruby }}
+    - name: Install DB dependencies
+    - run: sudo apt-get install libpq-dev libmysqlclient-dev libsqlite3-dev -y 
+    - name: Bundle & Generate dummy app
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3 --without development
+        bin/rake refinery:testing:dummy_app
+      env:
+        CI: true
+        DB: ${{ matrix.database }}
+        PGHOST: localhost
+        PGUSER: postgres
+        PGPORT: ${{ job.services.postgres.ports[5432] }}
+    - run: bundle exec rspec
+      env:
+        CI: true
+        DB: ${{ matrix.database }}
+        PGHOST: localhost
+        PGUSER: postgres
+        PGPORT: ${{ job.services.postgres.ports[5432] }}
+    
+    services:
+      postgres:
+        image: postgres:11.5
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    
+
