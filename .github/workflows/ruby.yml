@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         architecture: [x64]
-        database: [postgresql mysql]
+        database: ['postgresql', 'mysql']
         ruby: ['2.6.x']
       fail-fast: false
       max-parallel: 10
