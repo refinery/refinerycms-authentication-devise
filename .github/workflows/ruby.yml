@@ -33,14 +33,14 @@ jobs:
         DB: ${{ matrix.database }}
         DB_HOST: localhost
         DB_USER: postgres
-        DB_PORT: ${{ (matrix.database == 'postgres' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
+        DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
     - run: bundle exec rspec
       env:
         CI: true
         DB: ${{ matrix.database }}
         DB_HOST: localhost
         DB_USER: ${{ matrix.database }}
-        DB_PORT: ${{ (matrix.database == 'postgres' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
+        DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
     
     services:
       mysql:
