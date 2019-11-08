@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         architecture: [x64]
-        database: [postgresql]
+        database: [postgresql mysql]
         ruby: ['2.6.x']
       fail-fast: false
       max-parallel: 10
@@ -31,18 +31,22 @@ jobs:
       env:
         CI: true
         DB: ${{ matrix.database }}
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPORT: ${{ job.services.postgres.ports[5432] }}
+        DB_HOST: localhost
+        DB_USER: postgres
+        DB_PORT: ${{ (matrix.database == 'postgres' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
     - run: bundle exec rspec
       env:
         CI: true
         DB: ${{ matrix.database }}
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPORT: ${{ job.services.postgres.ports[5432] }}
+        DB_HOST: localhost
+        DB_USER: ${{ matrix.database }}
+        DB_PORT: ${{ (matrix.database == 'postgres' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && job.services.mysql.ports[3306]) }}
     
     services:
+      mysql:
+        image: mysql:5.7
+        ports: ["3306:3306"]
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
       postgres:
         image: postgres:11.5
         ports: ["5432:5432"]
