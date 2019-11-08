@@ -5,13 +5,13 @@ module Refinery
         class UsersController < Refinery::AdminController
 
           crudify :'refinery/authentication/devise/user',
-                  :order => 'username ASC',
-                  :title_attribute => 'username'
+                  order: 'username ASC',
+                  title_attribute: 'username'
 
           before_action :find_available_plugins, :find_available_roles,
-                        :only => [:new, :create, :edit, :update]
-          before_action :redirect_unless_user_editable!, :only => [:edit, :update]
-          before_action :exclude_password_assignment_when_blank!, :only => :update
+                        only: [:new, :create, :edit, :update]
+          before_action :redirect_unless_user_editable!, only: [:edit, :update]
+          before_action :exclude_password_assignment_when_blank!, only: :update
 
           def new
             @user = Refinery::Authentication::Devise::User.new
@@ -41,7 +41,7 @@ module Refinery
             @selected_plugin_names = params[:user][:plugins]
 
             if user_is_locking_themselves_out?
-              flash.now[:error] = t('lockout_prevented', :scope => 'refinery.authentication.devise.admin.users.update')
+              flash.now[:error] = t('lockout_prevented', scope: 'refinery.authentication.devise.admin.users.update')
               render :edit and return
             end
 
@@ -63,13 +63,13 @@ module Refinery
             # if the user is a superuser and can assign roles according to this site's
             # settings then the roles are set with the POST data.
             if user_can_assign_roles?
-              @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.downcase] }
+              @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.underscore] }
             else
               @user.add_role :refinery
             end
 
             redirect_to refinery.authentication_devise_admin_users_path,
-                        :notice => t('created', :what => @user.username, :scope => 'refinery.crudify')
+                        notice: t('created', what: @user.username, scope: 'refinery.crudify')
           end
 
           def create_failed
@@ -78,7 +78,7 @@ module Refinery
 
           def update_successful
             redirect_to refinery.authentication_devise_admin_users_path,
-                        :notice => t('updated', :what => @user.username, :scope => 'refinery.crudify')
+                        notice: t('updated', what: @user.username, scope: 'refinery.crudify')
           end
 
           def update_failed
@@ -88,9 +88,10 @@ module Refinery
           end
 
           def find_available_plugins
-            @available_plugins = Refinery::Plugins.registered.in_menu.map { |a|
-              { :name => a.name, :title => a.title }
-            }.sort_by { |a| a[:title] }
+            @available_plugins = Refinery::Plugins.registered.in_menu.map do |a|
+              { name: a.name, title: a.title }
+            end
+            @available_plugins.sort_by { |a| a[:title] }
           end
 
           def find_available_roles
@@ -104,6 +105,7 @@ module Refinery
           end
 
           private
+
           def exclude_password_assignment_when_blank!
             if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
               params[:user].extract!(:password, :password_confirmation)
@@ -119,7 +121,7 @@ module Refinery
             return false if current_refinery_user.id != @user.id || @selected_plugin_names.blank?
 
             @selected_plugin_names.exclude?('refinery_authentication_devise') || # removing user plugin access
-              @selected_role_names.map(&:downcase).exclude?('refinery') # Or we're removing the refinery role
+              @selected_role_names.map(&:underscore).exclude?('refinery') # Or we're removing the refinery role
           end
 
           def store_user_memento
