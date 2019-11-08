@@ -22,7 +22,7 @@ jobs:
         ruby-version: ${{ matrix.ruby }}
         version: ${{ matrix.ruby }}
     - name: Install DB dependencies
-    - run: sudo apt-get install libpq-dev libmysqlclient-dev libsqlite3-dev -y 
+      run: sudo apt-get install libpq-dev libmysqlclient-dev libsqlite3-dev -y 
     - name: Bundle & Generate dummy app
       run: |
         gem install bundler
