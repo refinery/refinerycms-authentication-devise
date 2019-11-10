@@ -32,7 +32,7 @@ jobs:
       env:
         CI: true
         DB: ${{ matrix.database }}
-        DATABASE_URL: ${{ (matrix.database == 'postgresql' && 'postgres://postgres:@localhost:5432/dummy_test') || (matrix.database == 'mysql' && 'mysql2://root:@127.0.0.1/dummy_test'}}
+        DATABASE_URL: ${{ (matrix.database == 'postgresql' && 'postgres://postgres:@localhost:5432/dummy_test') || (matrix.database == 'mysql' && 'mysql2://root:@127.0.0.1/dummy_test') }}
     services:
       postgres:
         image: postgres:11.5
