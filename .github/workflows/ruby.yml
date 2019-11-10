@@ -31,18 +31,19 @@ jobs:
       env:
         CI: true
         DB: ${{ matrix.database }}
-        DB_HOST: localhost
-        DB_USER: postgres
+        DB_HOST: ${{ (matrix.database == 'postgresql' && 'localhost') || (matrix.database == 'mysql' && '127.0.0.1') }}
+        DB_PASSWORD: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
+        DB_USER: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
         DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
         MYSQL_ROOT_PASSWORD: root
     - run: bundle exec rspec
       env:
         CI: true
         DB: ${{ matrix.database }}
-        DB_HOST: localhost
-        DB_USER: ${{ matrix.database }}
+        DB_HOST: ${{ (matrix.database == 'postgresql' && 'localhost') || '127.0.0.1' }}
+        DB_PASSWORD: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
+        DB_USER: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
         DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
-        MYSQL_ROOT_PASSWORD: root
       
     services:
       postgres:
