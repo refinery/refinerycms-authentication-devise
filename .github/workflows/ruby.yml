@@ -34,6 +34,7 @@ jobs:
         DB_HOST: localhost
         DB_USER: postgres
         DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
+        MYSQL_ROOT_PASSWORD: root
     - run: bundle exec rspec
       env:
         CI: true
@@ -41,7 +42,8 @@ jobs:
         DB_HOST: localhost
         DB_USER: ${{ matrix.database }}
         DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
-    
+        MYSQL_ROOT_PASSWORD: root
+      
     services:
       postgres:
         image: postgres:11.5
