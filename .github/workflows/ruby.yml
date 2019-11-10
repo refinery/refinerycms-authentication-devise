@@ -28,23 +28,11 @@ jobs:
         gem install bundler
         bundle install --jobs 4 --retry 3 --without development
         bin/rake refinery:testing:dummy_app
+        bundle exec rspec
       env:
         CI: true
         DB: ${{ matrix.database }}
-        DB_HOST: ${{ (matrix.database == 'postgresql' && 'localhost') || (matrix.database == 'mysql' && '127.0.0.1') }}
-        DB_PASSWORD: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
-        DB_USER: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
-        DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
-        MYSQL_ROOT_PASSWORD: root
-    - run: bundle exec rspec
-      env:
-        CI: true
-        DB: ${{ matrix.database }}
-        DB_HOST: ${{ (matrix.database == 'postgresql' && 'localhost') || '127.0.0.1' }}
-        DB_PASSWORD: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
-        DB_USER: ${{ (matrix.database == 'postgresql' && 'postgres') || (matrix.database == 'mysql' && 'root') }}
-        DB_PORT: ${{ (matrix.database == 'postgresql' && job.services.postgres.ports[5432]) || (matrix.database == 'mysql' && '3306') }}
-      
+        DATABASE_URL: ${{ (matrix.database == 'postgresql' && 'postgres://postgres:@localhost:5432/dummy_test') || (matrix.database == 'mysql' && 'mysql2://root:@127.0.0.1/dummy_test'}}
     services:
       postgres:
         image: postgres:11.5
