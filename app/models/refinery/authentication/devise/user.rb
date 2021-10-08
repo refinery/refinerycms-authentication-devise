@@ -49,7 +49,7 @@ module Refinery
         # https://github.com/plataformatec/devise/blob/v3.2.4/lib/devise/models/recoverable.rb#L45-L56
         def generate_reset_password_token!
           raw, enc = ::Devise.token_generator.generate(self.class, :reset_password_token)
-          update_attributes(
+          update(
             :reset_password_token => enc,
             :reset_password_sent_at => Time.now.utc
           )

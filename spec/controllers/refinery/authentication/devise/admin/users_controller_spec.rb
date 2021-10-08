@@ -79,7 +79,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       end
 
       it "will update to the plugins supplied" do
-        expect(logged_in_user).to receive(:update_attributes).with({"plugins" => %w(refinery_authentication_devise some_plugin)})
+        expect(logged_in_user).to receive(:update).with({"plugins" => %w(refinery_authentication_devise some_plugin)})
         allow(Refinery::Authentication::Devise::User).to receive_message_chain(:includes, :find) { logged_in_user }
         patch :update, params: { id: logged_in_user.id.to_s, user: { plugins: %w(refinery_authentication_devise some_plugin) } }
       end
