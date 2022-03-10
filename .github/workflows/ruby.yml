@@ -1,42 +1,52 @@
-name: Ruby
+name: CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test:
     strategy:
       matrix:
-        architecture: [x64]
-        database: ['postgresql', 'mysql']
-        ruby: ['2.6.x']
+        database: [ mysql, postgresql ]
+        ruby: [ 3.1, 3.0, 2.7, 2.6 ]
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 20
     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Set up Ruby ${{ matrix.ruby }}
-      uses: actions/setup-ruby@v1
-      with:
-        architecture: ${{ matrix.architecture }}
-        ruby-version: ${{ matrix.ruby }}
-        version: ${{ matrix.ruby }}
-    - name: Install DB dependencies
-      run: sudo apt-get install libpq-dev libmysqlclient-dev libsqlite3-dev -y 
-    - name: Bundle & Generate dummy app
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3 --without development
-        bin/rake refinery:testing:dummy_app
-        bundle exec rspec
-      env:
-        CI: true
-        DB: ${{ matrix.database }}
-        DATABASE_URL: ${{ (matrix.database == 'postgresql' && 'postgres://postgres:@localhost:5432/dummy_test') || (matrix.database == 'mysql' && 'mysql2://root:@127.0.0.1/dummy_test') }}
-    services:
-      postgres:
-        image: postgres:11.5
-        ports: ["5432:5432"]
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-    
+    env:
+      CI: true
+      DB: ${{ matrix.database }}
+      MYSQL_PASSWORD: root
+      PGHOST: localhost
+      PGPASSWORD: runner
+      PGUSER: runner
+      RAILS_ENV: test
+      RETRY_COUNT: 3
 
+    name: ${{ matrix.extension }} ${{ matrix.ruby }} ${{ matrix.database }}
+    steps:
+      - run: sudo apt-get update && sudo apt-get install libsqlite3-dev -y
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
+
+      - name: "Set up MySQL using VM's server"
+        if: ${{ env.DB == 'mysql' }}
+        run: |
+          sudo apt-get install libmysqlclient-dev -y
+          sudo systemctl start mysql.service
+
+      - name: "Set up PostgreSQL using VM's server"
+        if: ${{ env.DB == 'postgresql' }}
+        run: |
+          sudo apt-get install libpq-dev -y
+          sudo systemctl start postgresql.service
+          sudo -u postgres psql -c "CREATE USER runner WITH SUPERUSER PASSWORD 'runner'"
+
+      - run: bin/rake refinery:testing:dummy_app
+      - run: bin/rspec spec
