@@ -16,6 +16,17 @@ RSpec.configure do |config|
     rails actionpack railties capybara activesupport rack warden rspec actionview
     activerecord dragonfly benchmark
   ).map { |noisy| /#{noisy}/ }
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 end
 
 # Requires supporting files with custom matchers and macros, etc,

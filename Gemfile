@@ -39,7 +39,9 @@ end
 gem 'listen'
 
 group :test do
+  gem "database_cleaner-active_record"
   gem "launchy"
+  gem "pry"
 end
 
 # Load local gems according to Refinery developer preference.
