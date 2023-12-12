@@ -22,7 +22,8 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
   describe "#new" do
     it "renders the new template" do
       get :new
-      expect(response).to be_success
+
+      expect(response).to be_successful
       expect(response).to render_template("refinery/authentication/devise/admin/users/new")
     end
 
@@ -45,7 +46,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       expect(user).to receive(:save).once{ false }
       expect(Refinery::Authentication::Devise::User).to receive(:new).once.with(instance_of(ActionController::Parameters)){ user }
       post :create, params: { user: { username: 'bobby' } }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to render_template("refinery/authentication/devise/admin/users/new")
     end
   end
@@ -55,7 +56,7 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
 
     it "renders the edit template" do
       get :edit, params: { id: logged_in_user.id }
-      expect(response).to be_success
+      expect(response).to be_successful
       expect(response).to render_template("refinery/authentication/devise/admin/users/edit")
     end
 
