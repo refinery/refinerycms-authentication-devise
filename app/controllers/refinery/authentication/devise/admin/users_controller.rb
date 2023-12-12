@@ -48,7 +48,7 @@ module Refinery
             store_user_memento
 
             @user.roles = @selected_role_names.map { |r| Refinery::Authentication::Devise::Role[r.underscore] }
-            if @user.update_attributes user_params.to_h
+            if @user.update user_params.to_h
               update_successful
             else
               update_failed
