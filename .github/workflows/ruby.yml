@@ -26,10 +26,10 @@ jobs:
       RAILS_ENV: test
       RETRY_COUNT: 3
 
-    name: ${{ matrix.extension }} ${{ matrix.ruby }} ${{ matrix.database }}
+    name: ${{ matrix.ruby }} ${{ matrix.database }}
     steps:
       - run: sudo apt-get update && sudo apt-get install libsqlite3-dev -y
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
