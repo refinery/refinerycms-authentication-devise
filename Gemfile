@@ -2,12 +2,10 @@ source "https://rubygems.org"
 
 gemspec
 
-git "https://github.com/refinery/refinerycms", branch: "master" do
-  gem "refinerycms"
+gem "refinerycms", "4.1.0"
 
-  group :test do
-    gem "refinerycms-testing"
-  end
+group :test do
+  gem "refinerycms-testing", "4.1.0"
 end
 
 # Database Configuration
@@ -37,6 +35,11 @@ group :assets do
 end
 
 gem 'listen'
+
+gem 'mutex_m'
+gem 'base64'
+gem 'bigdecimal'
+gem 'observer'
 
 group :test do
   gem "database_cleaner-active_record"
