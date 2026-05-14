@@ -10,10 +10,17 @@ jobs:
   test:
     strategy:
       matrix:
-        database: [ mysql, postgresql ]
-        ruby: [ 2.7, 2.6 ]
+        database: [ sqlite3, mysql, postgresql ]
+        ruby: [ 4.0, 3.4, 3.3, 3.2 ]
+        rails: [ '~> 8.1.0', '~> 8.0.0', '~> 7.2.0', '~> 6.1.0' ]
+        exclude:
+          - ruby: 3.4
+            rails: '~> 6.1.0'
+          - ruby: 4.0
+            rails: '~> 6.1.0'
+          - database: sqlite3
+            rails: '~> 6.1.0'
       fail-fast: false
-      max-parallel: 20
     runs-on: ubuntu-latest
 
     env:
@@ -24,12 +31,13 @@ jobs:
       PGPASSWORD: runner
       PGUSER: runner
       RAILS_ENV: test
+      RAILS_VERSION: ${{ matrix.rails }}
       RETRY_COUNT: 3
 
-    name: ${{ matrix.ruby }} ${{ matrix.database }}
+    name: rails ${{ matrix.rails }} ruby ${{ matrix.ruby }} ${{ matrix.database }}
     steps:
       - run: sudo apt-get update && sudo apt-get install libsqlite3-dev -y
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
