@@ -12,6 +12,9 @@ if ENV['RAILS_VERSION']&.match?(/^~> [89]\./) || ENV['RAILS_VERSION']&.match?(/^
       gem "refinerycms-testing"
     end
   end
+
+  # Released decorators caps railties below 7.2; refinerycms main uses this branch too
+  gem "decorators", github: "parndt/decorators", branch: "zeitwerk"
 else
   gem "refinerycms", "4.1.0"
 
