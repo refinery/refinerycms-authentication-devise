@@ -5,7 +5,8 @@ gemspec
 gem 'rails', ENV['RAILS_VERSION'] if ENV['RAILS_VERSION']
 
 if ENV['RAILS_VERSION']&.match?(/^~> [89]\./) || ENV['RAILS_VERSION']&.match?(/^~> 7\.[2-9]/)
-  git "https://github.com/refinery/refinerycms", branch: "main" do
+  # TODO: back to branch: "main" once refinery/refinerycms#3540 merges
+  git "https://github.com/refinery/refinerycms", ref: "b2d9fed714ef0bcb05e0970d5c9ee58693b6150c" do
     gem "refinerycms"
 
     group :test do
