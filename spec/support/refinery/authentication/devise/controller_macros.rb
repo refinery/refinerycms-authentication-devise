@@ -2,10 +2,6 @@ module Refinery
   module Authentication
     module Devise
       module ControllerMacros
-        def self.extended(base)
-          base.send :include, ::Devise::Test::ControllerHelpers
-        end
-
         def refinery_login_with_devise(*roles)
           roles = handle_deprecated_roles!(roles).flatten
           let(:logged_in_user) do
@@ -44,5 +40,6 @@ module Refinery
 end
 
 RSpec.configure do |config|
+  config.include ::Devise::Test::ControllerHelpers, type: :controller
   config.extend Refinery::Authentication::Devise::ControllerMacros, type: :controller
 end
