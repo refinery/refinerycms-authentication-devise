@@ -4,8 +4,7 @@ gemspec
 
 gem 'rails', ENV['RAILS_VERSION'] if ENV['RAILS_VERSION']
 
-# TODO: back to branch: "main" once refinery/refinerycms#3540 merges
-git "https://github.com/refinery/refinerycms", ref: "fd344bb43ca6d79b7f11d34208098efd7de13163" do
+git "https://github.com/refinery/refinerycms", branch: "main" do
   gem "refinerycms"
 
   group :test do
