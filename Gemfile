@@ -54,8 +54,8 @@ gem 'listen'
 # Ruby 3.4+ extracted mutex_m from stdlib, but older Rails versions need it
 gem 'mutex_m' if RUBY_VERSION >= '3.4' && ENV['RAILS_VERSION']&.match?(/^~> [67]\./)
 
-# json 3 rejects the quirks_mode option Rails 6.1 still passes to JSON.generate
-gem 'json', '< 3' if ENV['RAILS_VERSION']&.match?(/^~> 6\./)
+# json 3 rejects the quirks_mode option Rails 8.0 and earlier pass to JSON.generate
+gem 'json', '< 3' if ENV['RAILS_VERSION']&.match?(/^~> (6|7|8\.0)\./)
 
 group :test do
   gem "database_cleaner-active_record"
