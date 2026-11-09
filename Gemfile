@@ -4,25 +4,16 @@ gemspec
 
 gem 'rails', ENV['RAILS_VERSION'] if ENV['RAILS_VERSION']
 
-if ENV['RAILS_VERSION']&.match?(/^~> [89]\./) || ENV['RAILS_VERSION']&.match?(/^~> 7\.[2-9]/)
-  # TODO: back to branch: "main" once refinery/refinerycms#3540 merges
-  git "https://github.com/refinery/refinerycms", ref: "b2d9fed714ef0bcb05e0970d5c9ee58693b6150c" do
-    gem "refinerycms"
-
-    group :test do
-      gem "refinerycms-testing"
-    end
-  end
-
-  # Released decorators caps railties below 7.2; refinerycms main uses this branch too
-  gem "decorators", github: "parndt/decorators", branch: "zeitwerk"
-else
-  gem "refinerycms", "4.1.0"
+# TODO: back to branch: "main" once refinery/refinerycms#3540 merges
+git "https://github.com/refinery/refinerycms", ref: "ccf4efb0501a03f9e355e11dca22819b03a865d0" do
+  gem "refinerycms"
 
   group :test do
-    gem "refinerycms-testing", "4.1.0"
+    gem "refinerycms-testing"
   end
 end
+
+gem "decorators", github: "parndt/decorators", branch: "zeitwerk"
 
 # Database Configuration
 if !ENV["CI"] || ENV["DB"] == "sqlite3"
@@ -54,7 +45,6 @@ gem 'listen'
 # Ruby 3.4+ extracted mutex_m from stdlib, but older Rails versions need it
 gem 'mutex_m' if RUBY_VERSION >= '3.4' && ENV['RAILS_VERSION']&.match?(/^~> [67]\./)
 
-# json 3 rejects the quirks_mode option Rails 8.0 and earlier pass to JSON.generate
 gem 'json', '< 3' if ENV['RAILS_VERSION']&.match?(/^~> (6|7|8\.0)\./)
 
 group :test do
