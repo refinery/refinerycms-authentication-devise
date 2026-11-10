@@ -2,7 +2,9 @@ source "https://rubygems.org"
 
 gemspec
 
-git "https://github.com/refinery/refinerycms", branch: "master" do
+gem 'rails', ENV['RAILS_VERSION'] if ENV['RAILS_VERSION']
+
+git "https://github.com/refinery/refinerycms", branch: "main" do
   gem "refinerycms"
 
   group :test do
@@ -11,7 +13,7 @@ git "https://github.com/refinery/refinerycms", branch: "master" do
 end
 
 # Database Configuration
-unless ENV["CI"]
+if !ENV["CI"] || ENV["DB"] == "sqlite3"
   gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
   gem "sqlite3", :platform => :ruby
 end
@@ -29,7 +31,6 @@ end
 
 gem "jruby-openssl", :platform => :jruby
 
-# Refinery/rails should pull in the proper versions of these
 group :assets do
   gem "sass-rails"
   gem "coffee-rails"
@@ -37,6 +38,11 @@ group :assets do
 end
 
 gem 'listen'
+
+# Ruby 3.4+ extracted mutex_m from stdlib, but older Rails versions need it
+gem 'mutex_m' if RUBY_VERSION >= '3.4' && ENV['RAILS_VERSION']&.match?(/^~> [67]\./)
+
+gem 'json', '< 3' if ENV['RAILS_VERSION']&.match?(/^~> (6|7|8\.0)\./)
 
 group :test do
   gem "database_cleaner-active_record"
