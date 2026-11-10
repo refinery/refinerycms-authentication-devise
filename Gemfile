@@ -12,8 +12,6 @@ git "https://github.com/refinery/refinerycms", branch: "main" do
   end
 end
 
-gem "decorators", github: "parndt/decorators", branch: "zeitwerk"
-
 # Database Configuration
 if !ENV["CI"] || ENV["DB"] == "sqlite3"
   gem "activerecord-jdbcsqlite3-adapter", :platform => :jruby
