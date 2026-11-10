@@ -9,6 +9,7 @@ jobs:
   push:
     if: github.repository == 'refinery/refinerycms-authentication-devise'
     runs-on: ubuntu-latest
+    environment: release
 
     permissions:
       contents: write
