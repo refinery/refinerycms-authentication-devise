@@ -6,7 +6,8 @@ module Refinery
 
           crudify :'refinery/authentication/devise/user',
                   order: 'username ASC',
-                  title_attribute: 'username'
+                  title_attribute: 'username',
+                  exclude_from_find: :show
 
           before_action :find_available_plugins, :find_available_roles,
                         only: [:new, :create, :edit, :update]

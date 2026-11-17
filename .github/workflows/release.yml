@@ -1,0 +1,41 @@
+name: Release Gem to rubygems.org
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  push:
+    if: github.repository == 'refinery/refinerycms-authentication-devise'
+    runs-on: ubuntu-latest
+    environment: release
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      # Set up
+      - uses: actions/checkout@v6
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+
+      # Release
+      #
+      # The gem is built with `gem build` and pushed with `gem push` rather than
+      # through `rake release`, so no bundle is installed. This keeps the same
+      # workflow working on older release lines whose bundle does not resolve
+      # on a current Ruby.
+      #
+      # rubygems/configure-rubygems-credentials exchanges the GitHub Actions OIDC
+      # token for a temporary RubyGems API key, enabling trusted publishing without
+      # storing any secrets.
+      - name: Configure RubyGems credentials
+        uses: rubygems/configure-rubygems-credentials@v2.0.0
+      - name: Release gem
+        run: |
+          gem build refinerycms-authentication-devise.gemspec --output refinerycms-authentication-devise.gem
+          gem push refinerycms-authentication-devise.gem
