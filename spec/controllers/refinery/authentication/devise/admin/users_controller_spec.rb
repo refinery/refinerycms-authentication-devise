@@ -86,6 +86,20 @@ describe Refinery::Authentication::Devise::Admin::UsersController, :type => :con
       end
     end
 
+    context "when a non-superuser tries to escalate their own plugins (REF-R004)" do
+      refinery_login_with_devise [:refinery]
+
+      it "ignores submitted plugins and preserves existing ones" do
+        existing_plugins = logged_in_user.plugins.pluck(:name)
+        patch :update, params: { id: logged_in_user.id.to_s, user: {
+          username: logged_in_user.username,
+          plugins: %w(refinery_authentication_devise refinery_pages refinery_images refinery_files)
+        } }
+        logged_in_user.reload
+        expect(logged_in_user.plugins.pluck(:name)).to eq(existing_plugins)
+      end
+    end
+
     it_should_behave_like "new, create, update, edit and update actions"
   end
 end
