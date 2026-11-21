@@ -39,6 +39,10 @@ module Refinery
             @selected_role_names = params[:user].delete(:roles) || []
             @selected_role_names = @user.roles.select(:title).map(&:title) unless user_can_assign_roles?
             @selected_plugin_names = params[:user][:plugins]
+            unless user_can_assign_plugins?
+              @selected_plugin_names = @user.plugins.pluck(:name)
+              params[:user][:plugins] = @selected_plugin_names
+            end
 
             if user_is_locking_themselves_out?
               flash.now[:error] = t('lockout_prevented', :scope => 'refinery.authentication.devise.admin.users.update')
@@ -115,6 +119,10 @@ module Refinery
               current_refinery_user.has_role?(:superuser)
           end
 
+          def user_can_assign_plugins?
+            current_refinery_user.has_role?(:superuser)
+          end
+
           def user_is_locking_themselves_out?
             return false if current_refinery_user.id != @user.id || @selected_plugin_names.blank?
 
@@ -135,10 +143,9 @@ module Refinery
           end
 
           def user_params
-            params.require(:user).permit(
-              :email, :password, :password_confirmation, :remember_me, :username,
-              :login, :full_name, plugins: []
-            )
+            base = [:email, :password, :password_confirmation, :remember_me, :username, :login, :full_name]
+            base << { :plugins => [] } if current_refinery_user.has_role?(:superuser)
+            params.require(:user).permit(*base)
           end
         end
       end
